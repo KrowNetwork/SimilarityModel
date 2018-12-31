@@ -86,6 +86,8 @@ def create_vec(data):
 
     # Decoding results from TensorFlow Serving server
     x = (r.json()["predictions"])
+    x = np.array(x)
+    print (x.shape)
    
     x = sum(np.array(x[0]))
    
