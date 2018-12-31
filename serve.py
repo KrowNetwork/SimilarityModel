@@ -20,7 +20,7 @@ import sys
 stop_words = set(stopwords.words('english'))
 
 w2v = pickle.load(open("w2v.bin", "rb"))
-v2w = pickle.load(open("v2w.bin", "rb"))
+# v2w = pickle.load(open("v2w.bin", "rb"))
 
 
 def clean(docs):
