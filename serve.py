@@ -1,5 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
+from scipy import linalg, mat, dot
 import numpy as np
 import flask
 import io
@@ -92,6 +93,9 @@ def create_vec(data):
     return x
 
 def calculate_similarity(v1, v2):
+    a = mat(v1)
+    b = mat(v2)
+    return dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
     sim = 1 - cosine(v1, v2)
     # sim = (sim - -1)/ (1 - -1)
     # print (type(sim))
