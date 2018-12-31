@@ -24,10 +24,10 @@ print ([layer.name for layer in x.layers])
 # word2vec = load_model("w2v.h5")
 
 word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
-word2vec.save("test.h5")
-word2vec = load_model("test.h5")
+# word2vec.save("test.h5")
+# word2vec = load_model("test.h5")
 # word2vec.compile(optimizer=keras.optimizers.Adam())
-# del x
+del x
 # layer_output = get_3rd_layer_output([word1_p, word1_p])[0]
 
 documents = pickle.load(open("clean.bin", "rb"))
