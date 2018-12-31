@@ -158,8 +158,9 @@ sd = docs
 
 docs[0] = pad_sequences(docs[0], maxlen=25, value=len(w2v), padding="post")
 docs[1] = pad_sequences(docs[1], maxlen=25, value=len(w2v), padding="post")
+print (docs[1])
 docs[2] = pad_sequences(docs[2], maxlen=25, value=len(w2v), padding="post")
-
+print (docs[2])
 # print (docs[0][:10])
 # print ( )
 # print (sd[0][:10])
