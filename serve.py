@@ -1,5 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
+# from keras.model import load_model, Model 
 from scipy import linalg, mat, dot
 import numpy as np
 import flask
@@ -14,7 +15,7 @@ import unicodedata
 import math
 import string
 import requests
-
+import sys
 
 stop_words = set(stopwords.words('english'))
 
@@ -72,9 +73,8 @@ def create_vec(data):
     data = clean([data])[0]
     data = [d.split(" ") for d in data][0]
     data = [subword(w, w2v) for w in data]
-    print (w2v)
    
-    data = pad_sequences(data, maxlen=25, value=11411, padding="post")
+    data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
     # print (data[0])
     payload = {
         "signature_name":"serving_default",
@@ -82,29 +82,17 @@ def create_vec(data):
             {"input_words": data.tolist()}
         ]
     }
-    r = requests.post('http://localhost:9000/v1/models/2:predict', json=payload)
-    r = requests.post('http://localhost:9000/v1/models/2:predict', json=payload)
+    r = requests.post('http://localhost:9000/v1/models/%s:predict' % sys.argv[1], json=payload)
 
-    # Decoding results from TensorFlow Serving server
-    print (r.text)
     x = (r.json()["predictions"])
-    print (x)
     x = np.array(x)
-    print (x.shape)
-   
     x = sum(np.array(x[0]))
-   
     pred = json.loads(r.content.decode('utf-8'))
     return x
 
 def calculate_similarity(v1, v2):
-    # a = mat(v1)
-    # b = mat(v2)
-    # return dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
-    print (v1)
-    print (v2)
     sim = 1 - cosine(v1, v2)
-    # sim = (sim - -1)/ (1 - -1)
+    sim = (sim - -1)/ (1 - -1)
     # print (type(sim))
     if sim == np.nan:
         sim = 0
