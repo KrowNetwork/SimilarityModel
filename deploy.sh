@@ -1,6 +1,6 @@
 #!/bin/bash
 
-serving_port = 9000
+serving_port = "9000"
 
 git pull
 
