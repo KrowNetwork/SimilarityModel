@@ -51,7 +51,7 @@ def subword(x, w2v):
         try:
             w.append(w2v[a])
         except:
-            w.append(len(w2v) - 1)
+            w.append(len(w2v))
 
     return w
 
