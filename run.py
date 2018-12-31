@@ -23,7 +23,7 @@ from model import create_model
 # tf.enable_eager_execution()
 batch_size = 2048 * 2
 epochs = 7500
-learning_rate = 0.00001
+learning_rate = 0.0001
 dataset_size = 200000
 emb_dim = 500
 gram_size = 3

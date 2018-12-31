@@ -28,7 +28,7 @@ def create_model(input_size, context_size, emb_dim, vocab_size, learning_rate, v
     input_target = Input((input_size, ))
     input_context = Input((context_size, input_size))
 
-    embedding = Embedding(11411, emb_dim, name="emb")
+    embedding = Embedding(11412, emb_dim, name="emb")
 
 
     target = embedding(input_target)

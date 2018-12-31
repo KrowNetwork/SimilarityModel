@@ -151,14 +151,14 @@ def run():
             w2v.append(i)
     w2v = list(set(w2v))
     # print (w2v)
-    for a in range(len(w2v)):
+    for a in range(1, len(w2v)):
         v2w[a] = w2v[a]
         w2v2[w2v[a]] = a
     print (w2v2)
     l = len(w2v2)
 
 
-    w2v2["PAD"] = l
+    w2v2["PAD"] = l + 1
     print(w2v2)
     # print (v2w)
     # print (w2v2)

@@ -18,13 +18,13 @@ def calculate_similarity(v1, v2):
         sim = 0
     return sim
 
-# x = load_model("model.h5")
-# print ([layer.name for layer in x.layers])
+x = load_model("model.h5")
+print ([layer.name for layer in x.layers])
 
-# # word2vec = load_model("w2v.h5")
+# word2vec = load_model("w2v.h5")
 
-# word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
-# word2vec.save("test.h5")
+word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
+word2vec.save("test.h5")
 word2vec = load_model("test.h5")
 # word2vec.compile(optimizer=keras.optimizers.Adam())
 # del x
