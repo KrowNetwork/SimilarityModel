@@ -23,50 +23,52 @@ def sum_embedding(x):
     return K.sum(x, axis=1, keepdims=False)
 
 print (sum_embedding.__name__)
-def create_model(input_size, context_size, emb_dim, vocab_size, learning_rate, verbose=False):
+def create_model(input_size, context_size, emb_dim, vocab_size, learning_rate, verbose=False, reload_model=False):
+    if not reload_model:
+        input_target = Input((input_size, ))
+        input_context = Input((context_size, input_size))
 
-    input_target = Input((input_size, ))
-    input_context = Input((context_size, input_size))
-
-    embedding = Embedding(vocab_size + 1, emb_dim, name="emb")
-
-
-    target = embedding(input_target)
-    # target2 = Add()(target[0])
-    target2 = Lambda(sum_embedding, name="embedding")(target)
-
-    # context_ = Dense(30)(input_context)
-    # context_ = Flatten()(context_)
-    context_ = embedding(input_context)
-    context_ = Lambda(sum_embedding)(context_)
-    context_ = Lambda(sum_embedding)(context_)
-    # context_ = Lambda(sum_embedding)(context_)
+        embedding = Embedding(vocab_size + 1, emb_dim, name="emb")
 
 
-    # context_ = Reshape((256, ))(context_)
-    # context_ = Lambda(sum_embedding)(context_)
+        target = embedding(input_target)
+        # target2 = Add()(target[0])
+        target2 = Lambda(sum_embedding, name="embedding")(target)
 
-    # dot_product = merge([target, context], mode='dot', dot_axes=1)
-    dot_product = Dot(1)([target2, context_])
-    # dot_product = Flatten()(context_)
-    # dot_product = context_
+        # context_ = Dense(30)(input_context)
+        # context_ = Flatten()(context_)
+        context_ = embedding(input_context)
+        context_ = Lambda(sum_embedding)(context_)
+        context_ = Lambda(sum_embedding)(context_)
+        # context_ = Lambda(sum_embedding)(context_)
 
-    similarity = Dot(0)([target2, context_])
 
-    # dot_product = Reshape((1,))(dot_product)
-    # add the sigmoid output layer
-    output = Dense(1, activation='sigmoid')(dot_product)
+        # context_ = Reshape((256, ))(context_)
+        # context_ = Lambda(sum_embedding)(context_)
 
-    model = Model(inputs=[input_target, input_context], outputs=output)
-    # checkpoint = keras.callbacks.ModelCheckpoint(filepath, monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+        # dot_product = merge([target, context], mode='dot', dot_axes=1)
+        dot_product = Dot(1)([target2, context_])
+        # dot_product = Flatten()(context_)
+        # dot_product = context_
 
-    model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.RMSprop(lr=learning_rate), metrics=["accuracy"])
+        similarity = Dot(0)([target2, context_])
 
-    # model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=0.0001), metrics=["accuracy"])
+        # dot_product = Reshape((1,))(dot_product)
+        # add the sigmoid output layer
+        output = Dense(1, activation='sigmoid')(dot_product)
 
-    # word2vec = Model(input=input_target, output=target2)
-    # sim_model = Model(input=[input_target, input_context], output=similarity)
-    # model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=0.001), metrics=["accuracy"])
+        model = Model(inputs=[input_target, input_context], outputs=output)
+        # checkpoint = keras.callbacks.ModelCheckpoint(filepath, monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+
+        model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.RMSprop(lr=learning_rate), metrics=["accuracy"])
+
+        # model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=0.0001), metrics=["accuracy"])
+
+        # word2vec = Model(input=input_target, output=target2)
+        # sim_model = Model(input=[input_target, input_context], output=similarity)
+        # model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=0.001), metrics=["accuracy"])
+    else:
+        model = keras.models.reload_model("model.h5")
     if verbose:
         print (model.summary())
     return model
