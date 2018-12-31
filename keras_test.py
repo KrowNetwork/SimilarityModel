@@ -21,7 +21,7 @@ def calculate_similarity(v1, v2):
 # x = load_model("model.h5")
 # print ([layer.name for layer in x.layers])
 
-# word2vec = load_model("w2v.h5")
+# # word2vec = load_model("w2v.h5")
 
 # word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
 # word2vec.save("test.h5")
@@ -156,9 +156,9 @@ sd = docs
 
 ## Pad
 
-docs[0] = pad_sequences(docs[0], maxlen=25, value=len(w2v), padding="post")
-docs[1] = pad_sequences(docs[1], maxlen=25, value=len(w2v), padding="post")
-docs[2] = pad_sequences(docs[2], maxlen=25, value=len(w2v), padding="post")
+docs[0] = pad_sequences(docs[0], maxlen=25, value=11411, padding="post")
+docs[1] = pad_sequences(docs[1], maxlen=25, value=11411, padding="post")
+docs[2] = pad_sequences(docs[2], maxlen=25, value=11411, padding="post")
 
 # print (docs[0][:10])
 # print ( )

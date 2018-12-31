@@ -158,7 +158,7 @@ def run():
     l = len(w2v2)
 
 
-    # w2v2["PAD"] = 0
+    w2v2["PAD"] = l
     print(w2v2)
     # print (v2w)
     # print (w2v2)

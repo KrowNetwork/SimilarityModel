@@ -26,10 +26,10 @@ class ModelTrainer():
         if type(x[0][0]) != type(0):
             c_ = []
             for i in x:
-                c_.append(list(keras.preprocessing.sequence.pad_sequences(i, maxlen=25, value=value, padding="post")))    
+                c_.append(list(keras.preprocessing.sequence.pad_sequences(i, maxlen=25, value=11411, padding="post")))    
             y = c_
         else:
-            y = list(keras.preprocessing.sequence.pad_sequences(x, maxlen=25, value=value, padding="post"))
+            y = list(keras.preprocessing.sequence.pad_sequences(x, maxlen=25, value=11411, padding="post"))
         return y
     
     @staticmethod
