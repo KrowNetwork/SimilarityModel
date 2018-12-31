@@ -107,6 +107,8 @@ words = words[:dataset_size]
 context = context[:dataset_size]
 
 vocab_size = len(w2v)
+print (vocab_size)
+exit()
 
 words_, context_ = words[int(0.5 * len(words)):], context[int(0.5 * len(words)):]
 labels_neg = [0] * len(words_)

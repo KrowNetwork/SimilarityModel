@@ -15,13 +15,8 @@ print ([layer.name for layer in x.layers])
 # word2vec = load_model("w2v.h5")
 
 word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
-del x
+m = tf.keras.estimator.model_to_estimator(
+    keras_model=word2vec
+)
 
-with K.get_session() as sess:
-    tf.saved_model.simple_save(
-        sess,
-        "models/2",
-        inputs={'input_words': word2vec.input},
-        outputs={"res": word2vec.output}
-    )
-    
+m.export_savedmodel("models/2")
