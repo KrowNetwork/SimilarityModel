@@ -72,9 +72,9 @@ def create_vec(data):
     data = clean([data])[0]
     data = [d.split(" ") for d in data][0]
     data = [subword(w, w2v) for w in data]
-    # print (w2v)
+    print (w2v)
    
-    data = pad_sequences(data, maxlen=25, value=len(w2v)+2, padding="post")
+    data = pad_sequences(data, maxlen=25, value=11411, padding="post")
     # print (data[0])
     payload = {
         "signature_name":"serving_default",
