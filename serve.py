@@ -93,7 +93,7 @@ def create_vec(data):
 
 def calculate_similarity(v1, v2):
     sim = 1 - cosine(v1, v2)
-    sim = (sim - -1)/ (1 - -1)
+    # sim = (sim - -1)/ (1 - -1)
     # print (type(sim))
     if sim == np.nan:
         sim = 0
