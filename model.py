@@ -68,7 +68,7 @@ def create_model(input_size, context_size, emb_dim, vocab_size, learning_rate, v
     # sim_model = Model(input=[input_target, input_context], output=similarity)
     # model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=0.001), metrics=["accuracy"])
 
-    model = keras.models.load_model("model.h5")
+    # model = keras.models.load_model("model.h5")
     if verbose:
         print (model.summary())
     return model

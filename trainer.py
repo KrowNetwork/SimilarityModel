@@ -62,7 +62,7 @@ class ModelTrainer():
     def shuffle_data(self):
         self.words, self.context, self.labels = self.randomize(self.words, self.context, self.labels)
 
-    def train(self, epochs):
+    def train(self, z, epochs):
         mod = int(np.floor(np.log10(len(self.words) / self.batch_size))) + 1
         self.words = self.pad(self.words, self.value)
         self.context = self.pad(self.context, self.value)
@@ -113,7 +113,7 @@ class ModelTrainer():
 
                 bar = "|" + "#" * length + " " * (int(max2/mod) - length) + "|"
 
-                sys.stdout.write("\reta: %s epoch %s/%s %s loss: %s | acc: %s" % (self.format_eta(eta), (e + 1), epochs, bar, l, a))
+                sys.stdout.write("\reta: %s epoch %s:%s/%s %s loss: %s | acc: %s" % (self.format_eta(eta), z, (e + 1), epochs, bar, l, a))
                 sys.stdout.flush()
                 # self.K.clear_session()
                 if l == 0 or a == 1:
@@ -134,7 +134,7 @@ class ModelTrainer():
             }
             self.experiment.log_metrics(metrics)
             # self.model.save("model.h5")
-            keras.models.save_model(model, "model.h5")
+            keras.models.save_model(self.model, "model.h5")
             # self.model.save_weights('model_weights.h5')
 
             # # Save the model architecture

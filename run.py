@@ -19,12 +19,13 @@ import random
 from keras.preprocessing.sequence import skipgrams
 from trainer import ModelTrainer
 from model import create_model
+import h5py 
 
 # tf.enable_eager_execution()
 batch_size = 2048 * 2
-epochs = 7500
+epochs = 2000
 learning_rate = 0.00001
-dataset_size = 200000
+dataset_size = 100000
 emb_dim = 500
 gram_size = 3
 context_size = 3
@@ -84,50 +85,52 @@ def randomize(l1, l2, l3):
 
     return l4, l5, l6
 
+def generate(swords, scontext, dataset_size):
+    words, context, bl = randomize(swords, scontext, [1] * len(swords))
+    words = words[:dataset_size]
+    context = context[:dataset_size]
 
+    words_, context_ = words[int(0.5 * len(words)):], context[int(0.5 * len(words)):]
+    labels_neg = [0] * len(words_)
+    random.shuffle(words_)
+
+    words, context = words[:int(0.5 * len(words))], context[:int(0.5 * len(words))]
+    labels = [1] * len(words)
+
+    words.extend(words_)
+    context.extend(context_)
+    labels.extend(labels_neg)
+    # print (words[0])
+    # print (context[0])
+    # exit()
+
+    words, context, labels = randomize(words, context, labels)
+
+    words_ = []
+    context_ = []
+    labels_neg = []
+
+    return words, context, labels
 
 
 documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
-v2w = pickle.load(open("v2w.bin", "rb"))
-
-
-
-
-words = []
-context = []
+# v2w = pickle.load(open("v2w.bin", "rb"))
+# swords = pickle.load(open("data/words.bin", "rb"))
+# scontext = pickle.load(open("data/context.bin", "rb"))
+# swords = np.load("words.bn.npz")["words"]
+# scontext = np.load("context.bin.npz")["context"]
+print ("Files downloaded")
+# words = []
+# context = []
 # ins = [[], []]
-words, context = data_processor.create_dataset(documents, w2v, gram_size, context_type=context_type)
 
-print (len(words))
-full_dataset_size = len(words)
-words, context, bl = randomize(words, context, [1] * len(words))
-words = words[:dataset_size]
-context = context[:dataset_size]
 
+# print (len(words))
+# full_dataset_size = len(words)
 vocab_size = len(w2v)
-print (vocab_size)
-# exit()
 
-words_, context_ = words[int(0.5 * len(words)):], context[int(0.5 * len(words)):]
-labels_neg = [0] * len(words_)
-random.shuffle(words_)
 
-words, context = words[:int(0.5 * len(words))], context[:int(0.5 * len(words))]
-lables = [1] * len(words)
-
-words.extend(words_)
-context.extend(context_)
-lables.extend(labels_neg)
-# print (words[0])
-# print (context[0])
-# exit()
-
-words, context, lables = randomize(words, context, lables)
-
-words_ = []
-context_ = []
-labels_neg = []
 # reload_model = False
 params={
     "batch_size":batch_size,
@@ -135,7 +138,7 @@ params={
     "learning_rate":learning_rate,
     "char_vocab_size": vocab_size,
     "dataset_size": dataset_size,
-    "full_dataset_size": full_dataset_size,
+    # "full_dataset_size": full_dataset_size,
     "embedding_dimsension": emb_dim,
     "gram_size": gram_size,
     "context_size": context_size,
@@ -144,13 +147,25 @@ params={
 
 experiment.log_parameters(params)
 
-model = create_model(input_size, context_size, emb_dim, vocab_size + 1, learning_rate, verbose=True)
+model = create_model(input_size, context_size, emb_dim, vocab_size, learning_rate, verbose=True)
 # del _
 
 # exit()
-model_trainer = ModelTrainer(K, model, None, words, context, lables, vocab_size, experiment, batch_size=batch_size, shuffle=True)
-model_trainer.train(epochs)
+for i in range(100):
 
+    random.shuffle(documents)
+    words, context = data_processor.create_dataset(documents[:int(len(documents) * 0.25)], w2v, gram_size, context_type=context_type)    
+
+    words, context, labels = generate(words, context, dataset_size)
+    print (len(words))
+    # lables = []
+
+    model_trainer = ModelTrainer(K, model, None, words, context, labels, vocab_size, experiment, batch_size=batch_size, shuffle=True)
+    model_trainer.train(i, epochs)
+
+    
+
+    
 # xy = "computers technology"
 # zy = "technology art"
 # x = "computers"

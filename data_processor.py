@@ -6,6 +6,8 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import unicodedata
 import math
+import h5py
+import numpy as np
 
 stop_words = set(stopwords.words('english'))
 porter = PorterStemmer()
@@ -159,7 +161,9 @@ def run():
 
 
     w2v2["PAD"] = l + 1
-    print(w2v2)
+    # print(w2v2)
+    print (len(w2v2))
+    print ("Covers %s of possible combinations" % (len(w2v2)/(27 * 26 * 27) * 100))
     # print (v2w)
     # print (w2v2)
     # exit()
@@ -170,9 +174,17 @@ def run():
     # print (len(vocab))
     #                         # w2n, n2w = create_dictionary(vocab)
     # pickle.dump(vocab, open("vocab.bin", "wb"))
+
+    # words, context = create_dataset(cleaned_docs, w2v2, 3, context_type="before")
+
     pickle.dump(cleaned_docs, open("clean.bin", "wb"))
     pickle.dump(w2v2, open("w2v.bin", "wb"))
-    pickle.dump(v2w, open("v2w.bin", "wb"))
+    # np.savez_compressed("words.bin", words=words)
+    # np.savez_compressed("context.bin", context=context)
+    # pickle.dump(v2w, open("v2w.bin", "wb"))
+    # pickle.dump(words, open("words.bin", "wb"))
+    # pickle.dump(context, open("context.bin", "wb"))
+    
 
 # pickle.dump(vecs, open("vec/s.bin", "wb"))
 
