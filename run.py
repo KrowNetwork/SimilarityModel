@@ -91,8 +91,7 @@ documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
 v2w = pickle.load(open("v2w.bin", "rb"))
 
-print (len(w2v))
-print (w2v["PAD"])
+
 
 
 words = []
@@ -108,7 +107,7 @@ context = context[:dataset_size]
 
 vocab_size = len(w2v)
 print (vocab_size)
-exit()
+# exit()
 
 words_, context_ = words[int(0.5 * len(words)):], context[int(0.5 * len(words)):]
 labels_neg = [0] * len(words_)

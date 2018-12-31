@@ -142,26 +142,22 @@ def run():
     print ("cleaning documents and creating vocab")
 
     cleaned_docs, vocab = clean(documents)
-    w2v = [""]
-    v2w = {1: "PAD"}
-    w2v2 = {"PAD": 1}
+    w2v = []
+    v2w = {}
+    w2v2 = {}
     for a in vocab:
         v = subword_embedding(a)
         for i in v:
             w2v.append(i)
     w2v = list(set(w2v))
     # print (w2v)
-    for a in range(2, len(w2v)):
+    for a in range(len(w2v)):
         v2w[a] = w2v[a]
         w2v2[w2v[a]] = a
     print (w2v2)
     l = len(w2v2)
 
-    word = v2w[l]
 
-    w2v2[word] = 1
-    w2v2["PAD"] = l
-    w2v2["EXTRA"] = l + 1
     # w2v2["PAD"] = 0
     print(w2v2)
     # print (v2w)
