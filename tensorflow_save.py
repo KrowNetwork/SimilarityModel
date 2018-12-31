@@ -20,7 +20,7 @@ del x
 with K.get_session() as sess:
     tf.saved_model.simple_save(
         sess,
-        "8",
+        "models/1",
         inputs={'input_words': word2vec.input},
         outputs={t.name:t for t in word2vec.outputs}
     )

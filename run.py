@@ -88,7 +88,6 @@ def randomize(l1, l2, l3):
 
 
 documents = pickle.load(open("clean.bin", "rb"))
-vocab = pickle.load(open("vocab.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
 v2w = pickle.load(open("v2w.bin", "rb"))
 

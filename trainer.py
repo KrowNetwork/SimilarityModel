@@ -117,12 +117,21 @@ class ModelTrainer():
                 sys.stdout.flush()
                 # self.K.clear_session()
                 if l == 0 or a == 1:
-                    break
+                    
+                    metrics = {
+                        "loss": l,
+                        "accuracy": a
+                    }
+
+                    self.experiment.log_metrics(metrics)
+                    self.model.save("model.h5")
+
+            
 
             metrics = {
-                'loss':l,
-                'accuracy':a
-                }
+                "loss": l,
+                "accuracy": a
+            }
             self.experiment.log_metrics(metrics)
             self.model.save("model.h5")
             # self.model.save_weights('model_weights.h5')
