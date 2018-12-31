@@ -93,9 +93,11 @@ def create_vec(data):
     return x
 
 def calculate_similarity(v1, v2):
-    a = mat(v1)
-    b = mat(v2)
-    return dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
+    # a = mat(v1)
+    # b = mat(v2)
+    # return dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
+    print (v1)
+    print (v2)
     sim = 1 - cosine(v1, v2)
     # sim = (sim - -1)/ (1 - -1)
     # print (type(sim))
