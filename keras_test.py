@@ -27,14 +27,14 @@ del x
 # layer_output = get_3rd_layer_output([word1_p, word1_p])[0]
 
 documents = pickle.load(open("clean.bin", "rb"))
-vocab = pickle.load(open("vocab.bin", "rb"))
+# vocab = pickle.load(open("vocab.bin", "rb"))
 
-vocab = sorted(vocab)
+# vocab = sorted(vocab)
 # print (vocab[1000:])
 # exit()
 
 w2v = pickle.load(open("w2v.bin", "rb"))
-v2w = pickle.load(open("v2w.bin", "rb"))
+# v2w = pickle.load(open("v2w.bin", "rb"))
 
 job_1 = """Software Developer
 Job ID 4258 Date posted 08/10/2018 Location NJ - Berkeley Heights
@@ -155,8 +155,7 @@ docs[0] = pad_sequences(docs[0], maxlen=25, value=len(w2v) + 2, padding="post")
 docs[1] = pad_sequences(docs[1], maxlen=25, value=len(w2v) + 2, padding="post")
 docs[2] = pad_sequences(docs[2], maxlen=25, value=len(w2v) + 2, padding="post")
 
-np.save("data.npy", docs[0])
-exit()
+
 ## Vecs
 
 vecs = [0, 0, 0]
@@ -164,6 +163,9 @@ vecs = [0, 0, 0]
 vecs[0] = sum(word2vec.predict(docs[0]))
 vecs[1] = sum(word2vec.predict(docs[1]))
 vecs[2] = sum(word2vec.predict(docs[2]))
+
+print(vecs[0])
+print(vecs[2])
 
 ## Sim
 
