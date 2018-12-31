@@ -82,10 +82,11 @@ def create_vec(data):
             {"input_words": data.tolist()}
         ]
     }
-    r = requests.post('http://localhost:9000/v1/models/1:predict', json=payload)
+    r = requests.post('http://localhost:9000/v1/models/2:predict', json=payload)
 
     # Decoding results from TensorFlow Serving server
-    x = (r.json()["predictions"])
+    x = (r.json()["embedding"])
+    print (x)
     x = np.array(x)
     print (x.shape)
    
