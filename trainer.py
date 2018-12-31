@@ -133,7 +133,8 @@ class ModelTrainer():
                 "accuracy": a
             }
             self.experiment.log_metrics(metrics)
-            self.model.save("model.h5")
+            # self.model.save("model.h5")
+            keras.models.save_model(model, "model.h5")
             # self.model.save_weights('model_weights.h5')
 
             # # Save the model architecture

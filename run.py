@@ -128,7 +128,7 @@ words, context, lables = randomize(words, context, lables)
 words_ = []
 context_ = []
 labels_neg = []
-
+# reload_model = False
 params={
     "batch_size":batch_size,
     "epochs":epochs,
