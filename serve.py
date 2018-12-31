@@ -85,6 +85,7 @@ def create_vec(data):
     r = requests.post('http://localhost:9000/v1/models/2:predict', json=payload)
 
     # Decoding results from TensorFlow Serving server
+    print (r.text)
     x = (r.json()["embedding"])
     print (x)
     x = np.array(x)
