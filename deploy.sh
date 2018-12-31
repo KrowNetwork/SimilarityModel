@@ -1,4 +1,5 @@
 #!/bin/bash
+killall screen 
 
 serving_port="9000"
 
