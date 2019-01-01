@@ -23,10 +23,10 @@ import h5py
 
 # tf.enable_eager_execution()
 batch_size = 2048 * 2
-epochs = 2000
-learning_rate = 0.00001
+epochs = 100
+learning_rate = 0.0001
 dataset_size = 100000
-emb_dim = 500
+emb_dim = 300
 gram_size = 3
 context_size = 3
 context_type = "before"
@@ -113,6 +113,9 @@ def generate(swords, scontext, dataset_size):
     return words, context, labels
 
 
+
+
+
 documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
@@ -151,17 +154,31 @@ model = create_model(input_size, context_size, emb_dim, vocab_size, learning_rat
 # del _
 
 # exit()
-for i in range(100):
 
-    random.shuffle(documents)
-    words, context = data_processor.create_dataset(documents[:int(len(documents) * 0.25)], w2v, gram_size, context_type=context_type)    
+try:
+    completed = []
+    for i in range(1500):
+        
+        random.shuffle(documents)
+        words, context = data_processor.create_dataset(documents[:int(len(documents) * 0.25)], w2v, gram_size, context_type=context_type)    
+        # print (np.array(words).shape)
+        # print (words[:10])
+        
+        words, context, labels = generate(words, context, dataset_size)
+        print (words[:10])
+        for a in words:
+            completed.extend(a)
+        completed = list(set(completed))
+        print (len(completed))
+        # lables = []
 
-    words, context, labels = generate(words, context, dataset_size)
-    print (len(words))
-    # lables = []
-
-    model_trainer = ModelTrainer(K, model, None, words, context, labels, vocab_size, experiment, batch_size=batch_size, shuffle=True)
-    model_trainer.train(i, epochs)
+        model_trainer = ModelTrainer(K, model, None, words, context, labels, vocab_size, experiment, batch_size=batch_size, shuffle=True)
+        model_trainer.train(i, epochs)
+        print ("\nCovered %s" % (len(completed)))
+        experiment.log_metric("covered", len(completed))
+except KeyboardInterrupt:
+    model.save("model.h5")
+    exit()
 
     
 

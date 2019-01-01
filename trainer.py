@@ -72,7 +72,7 @@ class ModelTrainer():
         width = max2 % mod
         begin = time.time()
         for e in range(epochs):
-            self.experiment.set_step(e + 1)
+            self.experiment.set_step((z) * epochs + e + 1)
 
             if self.shuffle:
                 self.shuffle_data()
@@ -133,8 +133,8 @@ class ModelTrainer():
                 "accuracy": a
             }
             self.experiment.log_metrics(metrics)
-            # self.model.save("model.h5")
-            keras.models.save_model(self.model, "model.h5")
+            self.model.save("trained/model_%s.h5" % z)
+            # keras.models.save_model(self.model, "model.h5")
             # self.model.save_weights('model_weights.h5')
 
             # # Save the model architecture
