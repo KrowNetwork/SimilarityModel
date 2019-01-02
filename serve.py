@@ -23,6 +23,7 @@ w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
 model = load_model("model.h5")
+word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
 
 
 def clean(docs):
@@ -75,7 +76,7 @@ def create_vec(data):
     data = [subword(w, w2v) for w in data]
     data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
 
-    x = model.predict([data])
+    x = word2vec.predict(data)
     x = np.array(x)
     print (x.shape)
     # print (x[0])
