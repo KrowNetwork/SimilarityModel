@@ -1,6 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
-# from keras.model import load_model, Model 
+from keras.model import load_model, Model 
 from scipy import linalg, mat, dot
 import numpy as np
 import flask
@@ -21,6 +21,8 @@ stop_words = set(stopwords.words('english'))
 
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
+
+model = load_model("model.h5")
 
 
 def clean(docs):
@@ -73,17 +75,8 @@ def create_vec(data):
     data = [subword(w, w2v) for w in data]
     data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
 
-    payload = {
-        "signature_name":"serving_default",
-        "instances": [
-            {"input_words": data.tolist()}
-        ]
-    }
-
-    r = requests.post('http://localhost:9000/v1/models/%s:predict' % sys.argv[1], json=payload)
-
-    x = (r.json()["predictions"])
-    x = np.array(x[0])
+    x = model.predict(data)
+    x = np.array(x)
     print (x.shape)
     # print (x[0])
     for i in range(len(x)):

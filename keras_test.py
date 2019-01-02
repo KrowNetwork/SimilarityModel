@@ -47,140 +47,152 @@ documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
-job_1 = """cognizant seeks an experienced Full Stack Developer to be part our customers in their journey to implement enterprise wide transformational projects. You will own the responsibility for designing and developing technical solutions for business requirements. Along this path, you will advise on the best practices and offer seasoned guidance on the technical solutions to meet the objectives of the project. As a key member of the project team, you will be interacting with the Project Manager, Techno Functional Analyst and Technical architect on a daily basis and will have a major influence on Cognizant’s relationship with the client.
+job_1 = """Connected Devices Sales Consultant Serve on the sales floor, selling connected home devices, such as routers, smart home devices, audio equipment, and more. Responsible for building and maintaining customer relationships, and up selling services to benefit the customer.  Sales, Technology , Customer Support , Amazon Alexa , Audio Products , Google Home , Networking """
 
+job_2 = """Seeing more than 200,000 patients per year, Mobile Health provides employment
+related screening services to the New York City home health and health care
+staffing industries and has established itself as the trusted vendor to almost
+every home care agency in NYC –more than 700 clients.
 
-Roles & Responsibilities:
+A few key points:
 
-Experience using backend technologies such as Java, Spring, Spring Boot, XML, Oracle Database.
+· Mobile Health’s core offering is medical screenings for health care workers.
+We perform over 120k drug screens, 100k tuberculosis tests and 60k physical
+exams per year
 
-Strong background in data structures and algorithms and computer science fundamentals.
+· Our proprietary technology, which integrates with our clients’ HRIS systems,
+supports the business
 
-Strong hands-on experience with REST Services
+· Mobile Health has seven of its own clinics across NYC and hundreds of urgent
+care center partners around the U.S. that provide services for its clients
+outside the NYC catchment area
 
-Build the solution construct in Cloud environment and assist with any migration elements.
+In 2018, Mobile Health introduced its online learning solution, Health
+e-Class. With the long-term goal of sharing caregiver compliance information
+between agencies, Mobile Health is using its monopolistic position and system
+integrations to further entrench itself into its clients’ DNA. By the end of
+2019, Mobile Health will have over 50,000 home health aides using its online
+and integrated system to complete their annual in-service requirement.
 
-Excellent skills in Typescripts, AngularJS/ReactJS, NodeJS, Javascript design architecture.
+Mobile Health is seeking a CTO to join its leadership team. This individual
+will represent both Product and Technology, working closely with other leaders
+and their respective teams, and be responsible for the Product Management,
+IT/Helpdesk, Developer/Engineering, QA and DevOps/Infrastructure teams who, as
+a group, are responsible for:
 
-Strong Web development experience.
+· Idealizing/Requirement gathering, scoping, ratifying, and facilitating the
+ratification of products, enhancements and improvements.
 
-Strong Object Oriented experience and knowledge.
+· Architecting, development, quality, and deployment and support for all
+platforms.
 
-Ability to work collaboratively in teams
+· Ensuring all platforms are scalable, stable, reliable and secure.
 
-Hands-on experience designing and building large scale web/desktop and mobile platforms which are systems of record or integrate multiple related systems of record.
+· Providing corporate IT functions, such as helpdesk, to ensure office
+connectivity, computers, software, networks, printers, and phone systems
+function properly.
 
-Qualification:
+· Delivering the development of precise and functional integrations between
+integration partners and platforms.
 
-Any Bachelor’s degree with minimum 5+ years of experience as a Full stack developer is a plus
+The CTO will be the most senior IT position within Mobile Health. As such, the
+organization will rely upon the successful candidate to help create our
+technology roadmap, support existing products, and build a stable
+infrastructure.
 
+**Responsibilities:**
 
-We are looking for applicants who have a flair for technology and are willing to take up challenging assignments.
+ **** · **Resource and Staff Management:** work with the leadership team to
+properly define the roles and responsibilities of the technology team,
+including organizational structure, job descriptions and team KPIs. Perform
+vendor review to ensure all 3rd parties are known and working in conjunction
+with our efforts.
 
+· **Platform and Infrastructure Architecture:** working with vendors and the
+entire IT team to document current platform architecture (short term task)
+while, in parallel, collaborating with stakeholders to define and lay out
+roadmap (longer term) and plan to reach desired architecture that supports
+Mobile Health’s existing and future products.
 
-**Applicants are required to be eligible to lawfully work in the U.S. immediately; employer will not sponsor applicants for U.S. work authorization (such as an H-1B visa) for this opportunity.
+· **Development Process and Communication:** Collaborate with business line
+leaders in the product development process to ensure all work and projects are
+linked to support the business goals and initiatives. Define and institute
+best practices for both development and infrastructure efforts, including
+improved communication up and out regarding various Initiatives and Projects.
 
+· **Budget:** perform review of existing Budget and, working with Finance,
+create annual departmental budget
 
-Technical Skills
-SNo
-Primary Skill
-Proficiency Level *
-Rqrd./Dsrd.
+**Skills/Competencies:**
 
-1
-React
-PL3
-Desired
+To apply for this position, you must have the following skills and
+competencies.
 
-2
-Node js
-PL2
-Desired
+· **Languages and Libraries**
 
-3
-Backbone
-PL2
-Desired
+o C++
 
-4
-Angular JS
-PL2
-Required
+o C#
 
-5
-HTML 5
-PL3
-Required
+o Python
 
-6
-JQuery
-PL3
-Desired
+o Java
 
-7
-Advanced JavaScript
-PL2
-Required
+· **Applications &amp; Platforms**
 
-8
-JavaScript
-PL2
-Required
+o Microsoft IIS
 
-9
-CSS
-PL3
-Required
+o Microsoft SQL Server
 
-Proficiency Legends
-Proficiency Level
-Generic Reference
+o NoSQL Database
 
-PL1
-The associate has basic awareness and comprehension of the skill and is in the process of acquiring this skill through various channels.
+o Linux
 
-PL2
-The associate possesses working knowledge of the skill, and can actively and independently apply this skill in engagements and projects.
+o Windows
 
-PL3
-The associate has comprehensive, in-depth and specialized knowledge of the skill. She / he has extensively demonstrated successful application of the skill in engagements or projects.
+o Various caching and performance platforms (preferred, but not required)
 
-PL4
-The associate can function as a subject matter expert for this skill. The associate is capable of analyzing, evaluating and synthesizing solutions using the skill.
+· **Experience**
 
+o Significant product, architect or VP experience architecting with proven
+ability in building scalable technology infrastructure to support business
+growth.
 
-Employee Status : Full Time Employee
+o Strong track record of 10-15+ years of progressive leadership with 2+ years
+in a VP (or comparable) role, with experience in the health technology space.
 
-Shift : Day Job
+o Experience working with highly sensitive data/PHI and installing systems to
+protect said data
 
-Travel : No
+o Manage recruitment, development, and retention of team, keeping staff
+focused, motivated and growing into future technical leaders.
 
-Job Posting : Dec 14 2018
+o Work with various project and open source development tools, including, but
+not limited to Slack, Jira, Confluence and GitHub.
 
-Cognizant US Corporation is an Equal Opportunity Employer Minority/Female/Disability/Veteran. If you require accessibility assistance applying for open positions in the US, please send an email with your request to CareersNA2@cognizant.com
-"""
+o Experience in a start-up or highly entrepreneurial environment.
 
-job_2 = """We are looking for an experienced and talented software engineer to join our growing team in the Princeton area and build technology solutions in the healthcare industry. We are looking for software engineers to design custom software on a variety of platforms.
+o Process oriented; able to build systemic metric efficiencies, which drive
+speed and measure accountability, and manage multiple parallel development
+work streams from concept to design and implementation and ongoing refinement
 
-Requirements
+· **Personal**
 
+o Entrepreneurial attitude.
 
-5 years or more of actual work experience designing and architecting commercial software
-Experience with the .NET framework and web application platforms (MVC, ASP.net)
-Basic experience with databases is required, but more advanced experience with index plans, query plans, and writing SQL is a plus
-Must work on premise in the Princeton, NJ area, please do not apply to work remotely
-W2 Employment only, please no sub-contractors or recruiters
-Comfortable in a team environment, i.e. using source control (SVN / Git) and working in an Agile environment
-Healthcare industry experience and experience with HIPAA protected data is a plus
-Benefits
+o Business maturity beyond technical ability, with ability to prioritize
+effectively in the face of business fluidity.
 
-We are not a recruiter or a placement agency - our team members are salaried, full-time W2 employees. You will not be placed at another company and will not work on-site with a customer. Work on-premise in our Princeton office.
+o Must be a leader, with ability to excel under pressure. Strong problem-
+solving and motivational skills.
 
+o Very creative, very flexible and thrives in an environment and industry that
+perpetually evolves to meet business needs.
 
-Competitive salary
-Fully vested 401k plan with employer matching contribution (up to 4% of salary)
-Health and dental insurance, including company-funded FSA (flexible-spending account)
-Paid time off for vacation and sick days"""
+o Excellent written and oral communication skills, for technical and non-
+technical audiences.
+
+o Thinks out of the box, but rolls up sleeves."""
 
 job_3 = """Autoholding 46 is a brand new high line used car facility in Mountain Lakes NJ! We have an opportunity for a highly motivated and experienced sales professionals looking to take a step into the luxury automobile environment. Sales Professionals can earn over $75,000 with commission and bonuses. The commission structure is based on the gross earned on the unit and bonuses are based on units sold per month.
 
