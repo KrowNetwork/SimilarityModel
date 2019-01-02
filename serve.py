@@ -84,6 +84,7 @@ def create_vec(data):
 
     x = (r.json()["predictions"])
     x = np.array(x)
+    print (x[0])
     for i in range(len(x)):
         a = x[i]
         a_d = np.linalg.norm(a)
