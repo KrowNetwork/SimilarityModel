@@ -90,6 +90,7 @@ def create_vec(data):
         a = a / a_d
         x[i] = a
     x = sum(x)/len(x)
+    print (x)
     # x = sum(np.array(x[0]))
     pred = json.loads(r.content.decode('utf-8'))
     return x
