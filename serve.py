@@ -101,7 +101,7 @@ def create_vec(data):
 
 def calculate_similarity(v1, v2):
     sim = 1 - cosine(v1, v2)
-    # print (sim)
+    print (sim)
     # sim = (0.25 * sim) + (1.25 * (sim ** 2))
     sim = 5.5511150000000004e-17 + 0.375*sim + 0.9375*sim**2
     if sim > 1:
