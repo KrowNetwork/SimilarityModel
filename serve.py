@@ -84,16 +84,19 @@ def create_vec(data):
 
     x = (r.json()["predictions"])
     x = np.array(x)
-    x_d = np.linalg.det(x)
-    x = x / x_d
-    print (x)
-    x = sum(np.array(x[0]))
+    for i in range(len(x)):
+        a = x[i]
+        a_d = np.linalg.norm(a)
+        a = a / a_d
+        x[i] = a
+    x = sum(x)/len(x)
+    # x = sum(np.array(x[0]))
     pred = json.loads(r.content.decode('utf-8'))
     return x
 
 def calculate_similarity(v1, v2):
     sim = 1 - cosine(v1, v2)
-    print (sim)
+    # print (sim)
     # sim = (0.25 * sim) + (1.25 * (sim ** 2))
     sim = 5.5511150000000004e-17 + 0.375*sim + 0.9375*sim**2
     if sim > 1:
