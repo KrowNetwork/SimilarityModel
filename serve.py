@@ -22,7 +22,7 @@ stop_words = set(stopwords.words('english'))
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
-model = load_model("model.h5")
+# model = load_model("model.h5")
 
 
 def clean(docs):
