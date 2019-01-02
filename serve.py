@@ -23,7 +23,7 @@ w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
 model = load_model("model.h5")
-word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
+word2vec = Model(inputs=model.input[0], output=model.get_layer("embedding").output)
 word2vec._make_predict_function()
 
 
@@ -88,7 +88,7 @@ def create_vec(data):
 
     # x = (r.json()["predictions"])
     # x = np.array(x[0])
-    x = word2vec.predict(x)
+    x = word2vec.predict(data)
     print (x.shape)
     # print (x[0])
     for i in range(len(x)):
