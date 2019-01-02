@@ -5,6 +5,12 @@ import progressbar
 import sys
 import time
 from model import sum_embedding
+from dataset_generator import Generator
+from producer import ProducerThread
+import os
+import glob
+
+
 
 class ModelTrainer():
 
@@ -43,7 +49,7 @@ class ModelTrainer():
             eta_format = '%ds' % eta
         return eta_format
 
-    def __init__(self, K, model, word2vec, words, context, labels, value, experiment, batch_size=2048, shuffle=False):
+    def __init__(self, K, q, model, word2vec, words, context, labels, value, experiment, batch_size=2048, shuffle=False):
         self.model = model
         self.word2vec = word2vec
         self.words = words 
@@ -54,6 +60,7 @@ class ModelTrainer():
         self.value = value
         self.experiment = experiment
         self.K = K
+        self.q = q
 
     def on_epoch_end(self):
         if self.shuffle == True:
@@ -63,7 +70,14 @@ class ModelTrainer():
         self.words, self.context, self.labels = self.randomize(self.words, self.context, self.labels)
 
     def train(self, z, epochs):
-        mod = int(np.floor(np.log10(len(self.words) / self.batch_size))) + 1
+        files = glob.glob('trained/*')
+        for f in files:
+            os.remove(f)
+        length = 30
+        count = int(len(self.words)/self.batch_size)
+        mod = int(count/length)
+        # mod = int(np.floor(np.log10(len(self.words) / self.batch_size)) + 1) * 30
+        print (mod)
         self.words = self.pad(self.words, self.value)
         self.context = self.pad(self.context, self.value)
 
@@ -71,7 +85,18 @@ class ModelTrainer():
         max2 = len(range(0, len(self.words), self.batch_size))
         width = max2 % mod
         begin = time.time()
+        
+        
+        # exit()
         for e in range(epochs):
+            producer = ProducerThread(self.words, self.context, self.labels, self.batch_size, self.value, self.q)
+            # print ("Starting producer")
+            producer.start()
+            # t = time.time()
+            # while not self.q.full():
+            #     pass 
+            # print (time.time() - t)
+            # exit()
             self.experiment.set_step((z) * epochs + e + 1)
 
             if self.shuffle:
@@ -86,17 +111,18 @@ class ModelTrainer():
             length = 0
             first = True 
             start = time.time()
+
             print ("\n")
-            for i in range(0, len(self.words), self.batch_size):
+            while not self.q.empty():
                 if c:
                     time_per_unit = (time.time() - start) / c 
                 else:
                     time_per_unit = 0
                 eta = time_per_unit * (max2 - c)
-
-                x1 = self.words[i:i+self.batch_size]
-                x2 = self.context[i:i+self.batch_size]
-                y = self.labels[i:i+self.batch_size]
+                x = self.q.get()
+                x1 = x[0]
+                x2 = x[1]
+                y = x[2]
 
                 out = self.model.train_on_batch([x1, x2], y)
                 loss += out[0]
@@ -124,16 +150,15 @@ class ModelTrainer():
                     }
 
                     self.experiment.log_metrics(metrics)
-                    self.model.save("model.h5")
+                    self.model.save("trained/model_%s.h5" % e)
 
             
-
             metrics = {
                 "loss": l,
                 "accuracy": a
             }
             self.experiment.log_metrics(metrics)
-            self.model.save("trained/model_%s.h5" % z)
+            self.model.save("trained/model_%s.h5" % e)
             # keras.models.save_model(self.model, "model.h5")
             # self.model.save_weights('model_weights.h5')
 

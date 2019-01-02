@@ -2,3 +2,4 @@ words.bin
 context.bin
 w2v.bin
 /trained
+data.json

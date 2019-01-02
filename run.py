@@ -20,29 +20,12 @@ from keras.preprocessing.sequence import skipgrams
 from trainer import ModelTrainer
 from model import create_model
 import h5py 
+from multiprocessing import freeze_support
+import queue
+
 
 # tf.enable_eager_execution()
-batch_size = 2048 * 2
-epochs = 100
-learning_rate = 0.0001
-dataset_size = 100000
-emb_dim = 300
-gram_size = 3
-context_size = 3
-context_type = "before"
-input_size = 25
 
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-# config.gpu_options.per_process_gpu_memory_fraction = 0.95
-
-session = tf.InteractiveSession(config=config)
-
-K.tensorflow_backend.set_session(session)
-
-
-experiment = Experiment(api_key="X2EWOW2J9duilIJlb4TaRjWbO",
-                        project_name="character-based-word2vec", workspace="tgs266")
 
 
 def sum_embedding(x):
@@ -114,7 +97,32 @@ def generate(swords, scontext, dataset_size):
 
 
 
+# if __name__ == "__main__":
+#     freeze_support()
+batch_size = 2048 * 2
+epochs = 300
+learning_rate = 0.0001
+dataset_size = 2000000
+emb_dim = 300
+gram_size = 3
+context_size = 3
+context_type = "before"
+input_size = 25
 
+buffer_size = int(dataset_size/batch_size) + 1
+q = queue.Queue(buffer_size)
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+# config.gpu_options.per_process_gpu_memory_fraction = 0.95
+
+session = tf.InteractiveSession(config=config)
+
+K.tensorflow_backend.set_session(session)
+
+
+experiment = Experiment(api_key="X2EWOW2J9duilIJlb4TaRjWbO",
+                        project_name="character-based-word2vec", workspace="tgs266")
 
 documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
@@ -157,25 +165,29 @@ model = create_model(input_size, context_size, emb_dim, vocab_size, learning_rat
 
 try:
     completed = []
-    for i in range(1500):
+    # for i in range(1500):
         
-        random.shuffle(documents)
-        words, context = data_processor.create_dataset(documents[:int(len(documents) * 0.25)], w2v, gram_size, context_type=context_type)    
-        # print (np.array(words).shape)
-        # print (words[:10])
-        
-        words, context, labels = generate(words, context, dataset_size)
-        print (words[:10])
-        for a in words:
-            completed.extend(a)
-        completed = list(set(completed))
-        print (len(completed))
-        # lables = []
+    random.shuffle(documents)
+    words, context = data_processor.create_dataset(documents[:int(len(documents) * 0.35)], w2v, gram_size, context_type=context_type)   
+    print (len(words)) 
+    # print (np.array(words).shape)
+    # print (words[:10])
+    
+    words, context, labels = generate(words, context, dataset_size)
 
-        model_trainer = ModelTrainer(K, model, None, words, context, labels, vocab_size, experiment, batch_size=batch_size, shuffle=True)
-        model_trainer.train(i, epochs)
-        print ("\nCovered %s" % (len(completed)))
-        experiment.log_metric("covered", len(completed))
+    # p = ProducerThread(words, context, labels, batch_size, value, q)
+    # print (words[:10])
+    for a in words:
+        completed.extend(a)
+    completed = list(set(completed))
+    print (len(completed))
+    # lables = []
+    # q = queue.Queue(buffer_size)
+
+    model_trainer = ModelTrainer(K, q, model, None, words, context, labels, vocab_size, experiment, batch_size=batch_size, shuffle=True)
+    model_trainer.train(0, epochs)
+    print ("\nCovered %s" % (len(completed)))
+    experiment.log_metric("covered", len(completed))
 except KeyboardInterrupt:
     model.save("model.h5")
     exit()
@@ -186,31 +198,32 @@ except KeyboardInterrupt:
 # xy = "computers technology"
 # zy = "technology art"
 # x = "computers"
-# y = "technology"
-# z = "art"
+    # y = "technology"
+    # z = "art"
 
 
-# vecs = data_processor.create_vecs(data_processor.clean([x, y, z])[0])
-# # print (vecs)
+    # vecs = data_processor.create_vecs(data_processor.clean([x, y, z])[0])
+    # # print (vecs)
 
-# print ("%s vs %s: %s" % (x, y, model.predict([vecs[0], vecs[1]])))
-# print ("%s vs %s: %s" % (x, z, model.predict([vecs[0], vecs[2]])))
-# a = word2vec.predict([vecs[0]])
-# b = word2vec.predict([vecs[1]])
-# # print (vecs)
-# print (sim_model.predict([vecs[0], vecs[1]]))
-# print (sim_model.predict([vecs[0], vecs[2]]))
+    # print ("%s vs %s: %s" % (x, y, model.predict([vecs[0], vecs[1]])))
+    # print ("%s vs %s: %s" % (x, z, model.predict([vecs[0], vecs[2]])))
+    # a = word2vec.predict([vecs[0]])
+    # b = word2vec.predict([vecs[1]])
+    # # print (vecs)
+    # print (sim_model.predict([vecs[0], vecs[1]]))
+    # print (sim_model.predict([vecs[0], vecs[2]]))
 
-# # print (len(a))
-# # print (len(a[0]))
-# # print (len(a[0][0]))
-# # print (a)
-# # print (a[0][-1])
-# # print (a[0][-2])
-# # print (" ")
-# print (a[0][1], vecs[0][0][1])
-# print (b[0][5], vecs[1][0][5])
+    # # print (len(a))
+    # # print (len(a[0]))
+    # # print (len(a[0][0]))
+    # # print (a)
+    # # print (a[0][-1])
+    # # print (a[0][-2])
+    # # print (" ")
+    # print (a[0][1], vecs[0][0][1])
+    # print (b[0][5], vecs[1][0][5])
 
-model.save("model.h5")
-word2vec.save("w2v.h5")
-sim_model.save("sim.h5")
+    model.save("model.h5")
+    word2vec.save("w2v.h5")
+    sim_model.save("sim.h5")
+
