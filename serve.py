@@ -83,8 +83,9 @@ def create_vec(data):
     r = requests.post('http://localhost:9000/v1/models/%s:predict' % sys.argv[1], json=payload)
 
     x = (r.json()["predictions"])
-    x = np.array(x)
-    print (x[0])
+    x = np.array(x[0])
+    print (x.shape)
+    # print (x[0])
     for i in range(len(x)):
         a = x[i]
         a_d = np.linalg.norm(a)
