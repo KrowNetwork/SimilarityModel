@@ -1,6 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
-# from keras.model import load_model, Model 
+from keras.models import load_model, Model 
 from scipy import linalg, mat, dot
 import numpy as np
 import flask
@@ -22,7 +22,9 @@ stop_words = set(stopwords.words('english'))
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
-# model = load_model("model.h5")
+model = load_model("model.h5")
+word2vec = Model(inputs=x.input[0], output=x.get_layer("embedding").output)
+word2vec._make_predict_function()
 
 
 def clean(docs):
