@@ -1,6 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
-from keras.model import load_model, Model 
+from keras.models import load_model, Model 
 from scipy import linalg, mat, dot
 import numpy as np
 import flask
