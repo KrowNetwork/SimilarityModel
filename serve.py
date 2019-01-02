@@ -75,7 +75,7 @@ def create_vec(data):
     data = [subword(w, w2v) for w in data]
     data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
 
-    x = model.predict(data)
+    x = model.predict([data])
     x = np.array(x)
     print (x.shape)
     # print (x[0])
