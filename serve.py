@@ -87,7 +87,7 @@ def create_vec(data):
     x = sum(x)/len(x)
     print (x)
     # x = sum(np.array(x[0]))
-    pred = json.loads(r.content.decode('utf-8'))
+    # pred = json.loads(r.content.decode('utf-8'))
     return x
 
 def calculate_similarity(v1, v2):
