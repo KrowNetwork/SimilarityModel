@@ -97,64 +97,7 @@ Preferred Qualifications
 What are my rewards and benefits?
 Discover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you’ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people."""
 
-job_1 = """Tucker Siegel
-Co-founder and Chief
-Technology Officer
-Tucker Siegel
-266 E Dudley Avenue
-Westfield, NJ 07090
-908.419.9415
-tuckers@krow.network
-siegel.tucker@gmail.com
-Skills
-Full stack developer with experience in languages ranging from
-Javascript to Python, as well as deep learning and artificial intelligence
-algorithms. Extensive experience in customer service and customer
-relations in a retail and services setting.
-Experience Krow Network / Co-founder and Chief Technology Officer
-August 2018 - PRESENT, NEWARK, NJ
-Leading multi-platform development to build a useable product for
-job seekers in the United States. Oversee all development of user
-facing and back-end services, and fully operate all artificial
-intelligence programs.
-Best Buy / Connected Devices Sales Consultant
-OCTOBER 2018 - PRESENT, UNION, NJ
-Develop relationships with customers to understand their situation and
-recommend the right solution. Implement sales tactics as well as sell
-recurring services and sign ups for the store credit card.
-Westfield, NJ /Intern at Technology Advisory Committee
-OCTOBER 2018 - PRESENT, WESTFIELD, NJ
-Meet with team members once a month to develop new technological
-solutions to current issues facing the town. Advise the mayor on
-budgeting concerns, and implementation of new ideas.
-Gold Medal Fitness / Member Services Representative
-MAY 2017 - PRESENT, GARWOOD, NJ
-Serve at the front desk for Gold Medal Fitness at the Garwood and
-Cranford, NJ locations. Responsible for handling member complaints,
-snack and beverage sales, and enrolling new members.
-ㅡ
-Education
-Westfield High School
-CLASS OF 2019
-Graduating with extensive classes in the STEM realm, and AP classes
-ranging from AP Statistics to AP Computer Science. Involved as Vice
-President of the STEM Club, as well as in the band program and multiple
-varsity sports.
-ㅡ
-Volunteer
-Westfield Presbyterian Church / Student Volunteer at Agape
-Community Kitchen
-SEPTEMBER 2012 - PRESENT, ELIZABETH, NJ
-Involved with providing a comfortable experience for the guests who
-come to the kitchen. Usually leading drinks preparation/serving or food
-preparation, and guiding newer members on how to do each job at the
-kitchen.
-Presbyterian Disaster Relief/ Student Volunteer
-JUNE 2017 - PRESENT
-Serve as student volunteer on two service trips, one to North Carolina
-after Hurricane Matthew, and one to Houston after Hurricane Harvey.
-Help rebuild damaged property, and create protective barriers incase
-another storm returns to the area."""
+job_1 = """Obinna Okonkwo 9108 Jousting Lane, UPPER MARLBORO, Maryland, 20772 * 2405849193 * Obinna 2013@gmail.com WORK EXPERIENCE HOWARD UNIVERSITY, Washington, District of Columbia Operations Coordinator, Aug 2015 - Aug 2018 Work with internal team to ensure all visitors are receiving the service we expect.. Handle equipment allocations, maintenance, inventory, and service timelines for all the Center's owned equipment.. Balance the needs of our customers with the needs of our operators; make the customer feel appreciated and heard while ensuring that internal operations are at the forefront of every decision. T.A.G LABS INC, Washington, DC, District of Columbia Student Intern - Game Design Instructor, Mar 2017 - Dec 2017 . Provide a Safe and Fun Learning Environment for Students with the DC Public School system.. Provide students with meaningful background in programs such as Python, C++, Javascript, and Phasor.. Contribute to the achievement of the organization's goals through instruction and commitment to T.A.G Labs Inc's the school's Principles Student Intern - T.A.G Business Analyst, Jan 2018 - Aug 2018 . Strong attention to detail, highly organized and able to thrive in a busy, deadline driven atmosphere.. Experience working with business users to gather requirements, writing functional and technical specifications and communicating technical requirements. Ability to grasp technical concepts and communicate to developers as well as communicate technical information to a non-technical audience.. Strong analytical skills, work ethic, independence, problem solving ability, and positive attitude ENVIRONMENTAL HEALTH ENGINEERING SERVICES, Upper Marlboro, Maryland Industrial Hygenist, Jun 2014 - May 2018 . Operate and maintain instruments including sampling pumps, calibrators, noise dosimeters, sound level meters, and direct reading gas meters. Develop sampling strategies for industrial hygiene projects.. Collect notes on activities performed by workers being monitored and/or maintain daily log of activities related to project work.• Complete data sheets, chain of custody forms, and prepare samples for shipment to laboratory. EDUCATION OXON HILL HIGH SCHOOL, Oxon Hill, Maryland High School Diploma, May 2013 HOWARD UNIVERSITY, Washington, DC, Maryland B.S in Electrical Engineering , May 2018 TOWSON UNIVERSITY, Towson, Maryland M.S in Computer Science Candidate, Expected graduation, May 2020 ADDITIONAL SKILLS . Python | C++ | Microsoft Office Suite | Matlab | Agile Environment . Network+ Certification *In Progress*"""
 
 parse = CommonRegex(job_2)
 print (parse)
@@ -230,7 +173,7 @@ for i in range(0, len(j1) - 5):
     nd0.append(j1[i:i + 5])
 
 j1 = nd0
-print (j1)
+print (np.array(j1).shape)
 j1 = [[d.split(" ") for d in a] for a in j1]
 # print (j1)
 j1 = [[[data_processor.subword(w, w2v) for w in d] for d in a] for a in j1]
@@ -331,7 +274,7 @@ def get_max_n(n, sims):
     # exit()
 
 def display(sims):
-    n = int(len(sims)*0.15)
+    n = int(len(sims)*0.35)
     n_avg = get_max_n(n, sims)
     n_avg_conv = 1.011951 + (0.0001021114 - 1.011951)/(1 + (n_avg/0.5718397)**5.644143)
 

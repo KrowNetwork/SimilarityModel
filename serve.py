@@ -111,6 +111,9 @@ def create_vec_resume(data):
     for i in range(0, len(data) - 5):
         nd0.append(data[i:i + 5])
 
+    print (np.array(nd0).shape)
+
+
     data = nd0 
     data = [[d.split(" ") for d in a] for a in data]
     data = [[[subword(w, w2v) for w in d] for d in a] for a in data]
