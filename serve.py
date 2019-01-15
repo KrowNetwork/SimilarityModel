@@ -184,7 +184,7 @@ def compare(d1, d2):
         # print (i)
         sims.append(calculate_similarity(i, d2_ret))
 
-    x = get_avg_n(int(len(sims)*0.15), sims)
+    x = get_avg_n(int(len(sims)*0.35), sims)
     print(x)
     # x = 1.011951 + (0.0001021114 - 1.011951)/(1 + (x/0.5718397)**5.644143)
     return x
