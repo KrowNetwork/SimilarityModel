@@ -5,7 +5,7 @@ import random
 import keras
 
 class ProducerThread(threading.Thread):
-    def __init__(self, words, context, labels, batch_size, vocab_size, q):
+    def __init__(self, words, context, labels, batch_size, vocab_size, q, pct):
         super(ProducerThread,self).__init__()
         self.words = words
         self.context = context 
@@ -13,6 +13,7 @@ class ProducerThread(threading.Thread):
         self.batch_size = batch_size
         self.vocab_size = vocab_size
         self.q = q
+        self.pct = pct
         
     @staticmethod
     def pad(x, value):
@@ -28,11 +29,14 @@ class ProducerThread(threading.Thread):
 
     def run(self):
         i = 0
-        while i < len(self.words):
+        words = self.words[:int(len(self.words) * self.pct)]
+        context = self.context[:int(len(self.context) * self.pct)]
+        labels = self.labels[:int(len(self.labels) * self.pct)]
+        while i < len(words):
             if not self.q.full():
-                x1 = self.words[i:i+self.batch_size]
-                x2 = self.context[i:i+self.batch_size]
-                y = self.labels[i:i+self.batch_size]
+                x1 = words[i:i+self.batch_size]
+                x2 = context[i:i+self.batch_size]
+                y = labels[i:i+self.batch_size]
                 i += self.batch_size
                 t = time.time()
                 self.q.put([x1, x2, y])

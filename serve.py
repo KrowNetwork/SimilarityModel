@@ -8,7 +8,7 @@ import io
 from flask import request
 import json
 import pickle 
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import unicodedata
@@ -16,6 +16,7 @@ import math
 import string
 import requests
 import sys
+import commonregex
 
 stop_words = set(stopwords.words('english'))
 
@@ -71,36 +72,64 @@ def subword_embedding(string):
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
 
-def create_vec(data):
+def create_vec_job(data):
     data = clean([data])[0]
     data = [d.split(" ") for d in data][0]
     data = [subword(w, w2v) for w in data]
     data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
 
-    # payload = {
-    #     "signature_name":"serving_default",
-    #     "instances": [
-    #         {"input_words": data.tolist()}
-    #     ]
-    # }
-
-    # r = requests.post('http://localhost:9000/v1/models/%s:predict' % sys.argv[1], json=payload)
-
-    # x = (r.json()["predictions"])
-    # x = np.array(x[0])
     x = word2vec.predict(data)
-    # print (x.shape)
-    # print (x[0])
+
     for i in range(len(x)):
         a = x[i]
         a_d = np.linalg.norm(a)
         a = a / a_d
         x[i] = a
     x = sum(x)/len(x)
-    # print (x)
-    # x = sum(np.array(x[0]))
-    # pred = json.loads(r.content.decode('utf-8'))
     return x
+
+def create_vec_resume(data):
+    parse = CommonRegex(data)
+
+    for i in parse.phones:
+        data = data.replace(i, "")
+
+    for i in parse.emails:
+        data = data.replace(i, "")
+
+    for i in parse.street_addresses:
+        data = data.replace(i, "")
+
+    data = sent_tokenize(data)
+    data = clean(data)[0]
+
+    nd0 = []
+    for i in range(0, len(data) - 5):
+        nd0.append(data[i:i + 5])
+
+    data = nd0 
+    data = [[d.split(" ") for d in a] for a in data]
+    data = [[[subword(w, w2v) for w in d] for d in a] for a in data]
+    data = [[pad_sequences(d, maxlen=25, value=len(w2v), padding="post") for d in a] for a in data]
+
+
+    rets = []
+    for z in j1:
+        for b in z:
+            x = word2vec.predict(b)
+            for i in range(len(x)):
+                a = x[i]
+                a_d = np.linalg.norm(a)
+                a = a / a_d
+                x[i] = a
+
+            rets.append(sum(x)/len(x))
+    return rets
+
+def get_max_n(n, sims):
+    sims_ = sorted(sims)[::-1]
+    sims_ = sims_[:n]
+    return (sum(sims_)/len(sims_))
 
 def calculate_similarity(v1, v2):
     sim = 1 - cosine(v1, v2)
@@ -117,16 +146,42 @@ def calculate_similarity(v1, v2):
         sim = 0
     return sim
 
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/predict-user", methods=["POST"])
+def predict_user():
 
     data = {"success": False}
 
     if flask.request.method == "POST":
-        data1 = create_vec(request.form["data1"])
-        data2 = create_vec(request.form["data2"])
+        x = compare(request.form["data1"], request.form["data2"])
+        # data1 = create_vec(request.form["data1"], resume=True)
+        # data2 = create_vec(request.form["data2"])
+        
+    return flask.jsonify(x)
+
+@app.route("/predict-employer", methods=["POST"])
+def predict_employer():
+
+    data = {"success": False}
+
+    if flask.request.method == "POST":
+        # x = compare(request.form["data1"], request.form["data2"])
+        data1 = create_vec_job(request.form["data1"])
+        data2 = create_vec_job(request.form["data2"])
         
     return flask.jsonify(calculate_similarity(data1, data2))
+
+def compare(d1, d2):
+    d2_ret = create_vec_job(d2)
+    d1_rets = create_vec_resume(d1)
+
+    sims = []
+    for i in d1_rets:
+        # print (i)
+        sims.append(calculate_similarity(i, d2_ret))
+
+    x = get_max_n(int(len(sims)*0.15), sims)
+    x = 1.011951 + (0.0001021114 - 1.011951)/(1 + (x/0.5718397)**5.644143)
+    return x
 
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
