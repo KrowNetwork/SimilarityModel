@@ -156,7 +156,7 @@ def predict_employer():
     data = {"success": False}
 
     if flask.request.method == "POST":
-        x = compare(request.form["data1"], request.form["data2"])
+        x = compare(request.form["data1"].lower(), request.form["data2"].lower())
         # data1 = create_vec(request.form["data1"], resume=True)
         # data2 = create_vec(request.form["data2"])
         
@@ -169,8 +169,8 @@ def predict_user():
 
     if flask.request.method == "POST":
         # x = compare(request.form["data1"], request.form["data2"])
-        data1 = create_vec_job(request.form["data1"])
-        data2 = create_vec_job(request.form["data2"])
+        data1 = create_vec_job(request.form["data1"].lower())
+        data2 = create_vec_job(request.form["data2"].lower())
         
     return flask.jsonify(calculate_similarity(data1, data2))
 
