@@ -118,7 +118,7 @@ def create_vec_resume(data):
 
 
     rets = []
-    for z in j1:
+    for z in data:
         for b in z:
             x = word2vec.predict(b)
             for i in range(len(x)):
@@ -150,8 +150,8 @@ def calculate_similarity(v1, v2):
         sim = 0
     return sim
 
-@app.route("/predict-user", methods=["POST"])
-def predict_user():
+@app.route("/predict-employer", methods=["POST"])
+def predict_employer():
 
     data = {"success": False}
 
@@ -162,8 +162,8 @@ def predict_user():
         
     return flask.jsonify(x)
 
-@app.route("/predict-employer", methods=["POST"])
-def predict_employer():
+@app.route("/predict-user", methods=["POST"])
+def predict_user():
 
     data = {"success": False}
 
