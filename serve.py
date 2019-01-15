@@ -1,6 +1,6 @@
 from keras.preprocessing.sequence import pad_sequences
 from scipy.spatial.distance import cosine
-from keras.models import load_model, Model 
+# from keras.models import load_model, Model 
 from scipy import linalg, mat, dot
 import numpy as np
 import flask
@@ -16,7 +16,11 @@ import math
 import string
 import requests
 import sys
-import commonregex
+import tensorflow as tf 
+from commonregex import CommonRegex
+
+K = tf.keras.backend
+load_model = tf.keras.models.load_model
 
 stop_words = set(stopwords.words('english'))
 
@@ -24,7 +28,7 @@ w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
 model = load_model("model.h5")
-word2vec = Model(inputs=model.input[0], output=model.get_layer("embedding").output)
+word2vec = tf.keras.models.Model(inputs=model.input[0], outputs=model.get_layer("embedding").output)
 word2vec._make_predict_function()
 
 
