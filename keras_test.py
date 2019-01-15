@@ -112,7 +112,7 @@ for i in parse.street_addresses:
     job_2 = job_2.replace(i, "")
 
 
-job_3 = """We are looking for an experienced and responsible landscaper to join our team. The ideal candidate will be comfortable operating lawn maintenance equipment such as lawn mowers, trimmers, and blowers.
+job_3 = """Landscaper We are looking for an experienced and responsible landscaper to join our team. The ideal candidate will be comfortable operating lawn maintenance equipment such as lawn mowers, trimmers, and blowers.
 
 The landscaper will ensure the growth and vibrancy of our plants, flowers, lawn, and decorative shrubs. The landscaper will water, fertilize, and prune to remove damaged or dying plant life. The candidate can expect to work outdoors in a mix of weather conditions, and be able to perform maintenance duties to ensure employee safety during inclement weather by removing debris, snow, and ice from communal walkways and spaces.
 

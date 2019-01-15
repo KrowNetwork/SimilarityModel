@@ -104,7 +104,7 @@ def create_vec_resume(data):
     for i in parse.street_addresses:
         data = data.replace(i, "")
 
-    data = sent_tokenize(data)
+    data = sent_tokenize(data.lower())
     data = clean(data)[0]
 
     nd0 = []
@@ -143,7 +143,7 @@ def calculate_similarity(v1, v2):
     sim = 1 - cosine(v1, v2)
     # print (sim)
     # sim = (0.25 * sim) + (1.25 * (sim ** 2))
-    sim = 5.5511150000000004e-17 + 0.375*sim + 0.9375*sim**2
+    # sim = 5.5511150000000004e-17 + 0.375*sim + 0.9375*sim**2
     if sim > 1:
         sim = 0.99
     if sim < 0:
