@@ -108,9 +108,9 @@ def create_vec_resume(data):
     data = clean(data)[0]
 
     nd0 = []
-    for i in range(0, len(data)):
-    # nd0.append(j1[i:i + 5])
-        nd0.append([data[i]])
+    for i in range(0, len(data)-5):
+        nd0.append(j1[i:i + 5])
+        # nd0.append([data[i]])
 
     print (np.array(nd0).shape)
 
@@ -123,6 +123,7 @@ def create_vec_resume(data):
 
     rets = []
     for z in data:
+        e = []
         for b in z:
             x = word2vec.predict(b)
             for i in range(len(x)):
@@ -130,8 +131,9 @@ def create_vec_resume(data):
                 a_d = np.linalg.norm(a)
                 a = a / a_d
                 x[i] = a
+            e.extend(x)
 
-            rets.append(sum(x)/len(x))
+        rets.append(sum(e)/len(e))
     return rets
 
 def get_avg_n(n, sims):
