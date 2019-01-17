@@ -108,8 +108,8 @@ def create_vec_resume(data):
     data = clean(data)[0]
 
     nd0 = []
-    for i in range(0, len(data) - 5):
-        nd0.append(data[i:i + 5])
+    for i in range(0, len(data) - 3):
+        nd0.append(data[i:i + 3])
 
     print (np.array(nd0).shape)
 
