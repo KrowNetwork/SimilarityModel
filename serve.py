@@ -108,8 +108,8 @@ def create_vec_resume(data):
     data = clean(data)[0]
 
     nd0 = []
-    for i in range(0, len(data)-5):
-        nd0.append(data[i:i + 5])
+    for i in range(0, len(data)-1):
+        nd0.append(data[i:i + 1])
         # nd0.append([data[i]])
 
     print (np.array(nd0).shape)
@@ -192,6 +192,7 @@ def compare(d1, d2):
 
     x = get_avg_n(int(len(sims)*1), sims)
     x = 1.141987 + (-6.161418e-17 - 1.141987)/(1 + (x/0.6625342)**4.741564)
+    return max(sims)
     # print(x)
     # x = 1.011951 + (0.0001021114 - 1.011951)/(1 + (x/0.5718397)**5.644143)
     return x
