@@ -169,8 +169,8 @@ docs[1] = [d.split(" ") for d in docs[1]]
 # docs[2] = [d.split(" ") for d in docs[2]]
 
 nd0 = []
-for i in range(0, len(j1) - 5):
-    nd0.append(j1[i:i + 5])
+for i in range(0, len(j1) - 2):
+    nd0.append(j1[i:i + 2])
 
 j1 = nd0
 print (np.array(j1).shape)
