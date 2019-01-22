@@ -132,8 +132,8 @@ def create_vec_resume(data):
                 a = a / a_d
                 x[i] = a
             e.extend(x)
-
-        rets.append(sum(e)/len(e))
+        if (len(e) != 0):
+            rets.append(sum(e)/len(e))
     return rets
 
 def get_avg_n(n, sims):
