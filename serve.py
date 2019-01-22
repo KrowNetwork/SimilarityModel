@@ -108,8 +108,8 @@ def create_vec_resume(data):
     data = clean(data)[0]
 
     nd0 = []
-    for i in range(0, len(data)-1):
-        nd0.append(data[i:i + 1])
+    for i in range(0, len(data)-2):
+        nd0.append(data[i:i + 2])
         # nd0.append([data[i]])
 
     print (np.array(nd0).shape)
@@ -191,8 +191,8 @@ def compare(d1, d2):
         sims.append(calculate_similarity(i, d2_ret))
 
     # x = get_avg_n(int(len(sims)*1), sims)
-    x = max(sims)
-    x = 1.007485 + (0.5987585 - 1.007485)/(1 + (max(sims)/0.7986861)**17.69422)
+    x = sum(sims)/len(sims)
+    # x = 1.007485 + (0.5987585 - 1.007485)/(1 + (max(sims)/0.7986861)**17.69422)
     return x
     # print(x)
     # x = 1.011951 + (0.0001021114 - 1.011951)/(1 + (x/0.5718397)**5.644143)
