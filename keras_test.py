@@ -130,7 +130,7 @@ job_1 = """Tucker Siegel Co-founder and Chief Technology Officer. Tucker Siegel 
 
 
 # job_1 = """CIDNEY M. KING. 15703 Swanscombe Loop, Upper Marlboro, Maryland, 20774. cidneyking@ifly-youth.org. (202) 738-6261. PROFESSIONAL EXPERIENCE. Founder & President. May 2017 Present iFLY Youth Inc. - Washington, D.C. Created iFLY Youth, an organization focused on providing middle school girls of color from underserved. neighborhoods in the Greater Washington Area the opportunity to travel, serve, and learn internationally. . Secured over $26,000 in seed funding from private foundations, corporations, and individual donors. Work alongside and lead board of directors in managing and implementing all structural, financial, and operational processes and continually improve policies and procedures to further streamline efficient operations. Developed partnership with E.L. Haynes Public Charter School and piloted 6-day international travel experience to Costa Rica for 10 of their students. Manager of Operations & Community Engagement Chair. January 2017 Present Capital Village Schools - Washington, D.C. Collaborate with a team of school leaders, community leaders, professionals and educators in the design and launch of a network of micro-schools that will prepare all students, regardless of background or circumstance, to reach their full potential in college, career and life in order to become agents of change in their communities Facilitate strategic partnerships that will aid in building small learning communities focused on relevant realworld problems, personalized to each student's individual needs, and centered around the whole child Plan and execute community engagement events, including overseeing the budget, purchasing materials and onsite logistics Finalized student recruitment, enrollment and parent involvement plans for 4 week-summer pilot of Capital Village's school model. Manager of Recruitment. July 2016 May 2017 Teach for America  Washington, D.C. Identified, cultivated, and influenced 19 diverse top-talent seniors from University of Maryland College Park to apply to and join Teach For America through 1:1 meetings, ongoing phone/email outreach, classroom and student organization presentations, information sessions, campus events, social media, and faculty networking Managed a team of 4 part-time student interns to reach rigorous weekly goals, create innovative events and marketing strategy, support pipeline development, and coach on how to build awareness of Teach For America and the issue of educational inequity on campus Utilized Salesforce to inform strategic decisions and track campaign actions, including pipeline development, event planning, relationship building, and confirmation. Mathematics Teacher. July 2014 July 2016 Al Badiya School -Al Wagon, United Arab Emirates . Scaffolded large learning tasks into meaningful and manageable segments for English second language. learners in 6th grade to ensure 100 percent of students achieved their individual growth goals . Managed systems for tracking large amounts of data geared toward reaching an overall class goal of at least. 80 percent mastery of all math objectives Observed teammates bi-monthly and offered constructive criticism for best practices to increase math literacy and heighten student ownership of learning. English Language Arts Teacher. May 2012 July 2014 Walipp Preparatory Academy - Houston, Texas . Launched Leadership Atlanta Program, which provided 12 girls with the opportunity to travel to. colleges/universities in Atlanta, Georgia and spearheaded 12-thousand-dollar fundraising goal Created culturally relevant lesson plans for 130 students in grades 6th through 8th to ensure 100 percent of learners achieved a minimum of 75 percent mastery of each reading objective."""
-job_1 = """NURSING TEMPLATE. 500 Resume Sample Road Atlanta, Georgia (123) 123-1234 sample.nurse resume.com. Summary. Awarded Northside Hospital, Nurse of the Year. Awarded Atlanta Medical Center, Preceptor of the Year. Dedicated, compassionate, knowledgeable Registered Nurse with over 13 years of experience, 10 of those years in the critical care setting. Meticulously detail-oriented, observant and proactive. Performs well in high pressure, fast paced environment. Skilled in working with doctors for efficient patient management and a team player who is able to relate well with coworkers Special practice in the cardiac cath/EP labs and post op recovery of cath/EP patients. Experience in TAVR surgeries. Experience in Preop / PACU areas specializing in ENT, eye. orthopedic, and GYN surgeries. Education. Georgia State University, Atlanta, Georgia BSc. Nursing Graduated - May 2004. Employment History. Surgecenter of Louisville, Louisville, Kentucky Preop Nurse /PACU Nurse January 2017 - Present I am currently working in an outpatient surgery center in both the Preop and the Post Anesthesia Care Unit (PACU) departments. We have four operating rooms and specialize in eye, ENT, orthopedic, and gynecological surgeries. I work closely with the center's physicians and anesthesiologists. I care for infants, children and adults. Atlanta Medical Center, Atlanta, Georgia Registered Nurse / Staff Nurse October 2014 September 2017 I worked in a fast paced 5 room cath lab. We performed up to 30 cases daily which varied from diagnostic caths to ablations, to peripheral cases, to Anari procedures. I was also a part of Atlanta Medical Center's STEMI team. Atlanta Medical Center is one of the few hospitals in Georgia to receive accreditation as a heart attack receiving closely with both physicians and my coworkers to care for my patients to the best of my ability. I was also on the Quality council and worked closely with Unit Based Shared Governance."""
+# job_1 = """NURSING TEMPLATE. 500 Resume Sample Road Atlanta, Georgia (123) 123-1234 sample.nurse resume.com. Summary. Awarded Northside Hospital, Nurse of the Year. Awarded Atlanta Medical Center, Preceptor of the Year. Dedicated, compassionate, knowledgeable Registered Nurse with over 13 years of experience, 10 of those years in the critical care setting. Meticulously detail-oriented, observant and proactive. Performs well in high pressure, fast paced environment. Skilled in working with doctors for efficient patient management and a team player who is able to relate well with coworkers Special practice in the cardiac cath/EP labs and post op recovery of cath/EP patients. Experience in TAVR surgeries. Experience in Preop / PACU areas specializing in ENT, eye. orthopedic, and GYN surgeries. Education. Georgia State University, Atlanta, Georgia BSc. Nursing Graduated - May 2004. Employment History. Surgecenter of Louisville, Louisville, Kentucky Preop Nurse /PACU Nurse January 2017 - Present I am currently working in an outpatient surgery center in both the Preop and the Post Anesthesia Care Unit (PACU) departments. We have four operating rooms and specialize in eye, ENT, orthopedic, and gynecological surgeries. I work closely with the center's physicians and anesthesiologists. I care for infants, children and adults. Atlanta Medical Center, Atlanta, Georgia Registered Nurse / Staff Nurse October 2014 September 2017 I worked in a fast paced 5 room cath lab. We performed up to 30 cases daily which varied from diagnostic caths to ablations, to peripheral cases, to Anari procedures. I was also a part of Atlanta Medical Center's STEMI team. Atlanta Medical Center is one of the few hospitals in Georgia to receive accreditation as a heart attack receiving closely with both physicians and my coworkers to care for my patients to the best of my ability. I was also on the Quality council and worked closely with Unit Based Shared Governance."""
 # job_1 = """Shawnee M. Johnson smjohnson3195@gmail.com. (240) 715-5853. www.linkedin.com/in/shawneemjohnson. EDUCATION: B. A. Sociology, University of Maryland, College Park (UMD) Relevant Courses: Social Psychology, Research Methods in Sociology, Social Stratification & Inequality, Writing For Non-Profits and Communication Core Competencies: Data entry & analysis, administrative support, excellent writing and communication skills and strong interpersonal skills Skills & Abilities: Advanced proficiency in Microsoft Office applications, Intermediate proficiency in SPSS & GSS, and novice comprehension of French & Spanish. EXPERIENCE Careers in Nonprofits | Administrative Assistant (Temporary) | Washington, D.C. | April 2018 - Present. . Schedules and coordinates meetings for executives and facilities . Sorts and distributes incoming communication data, including faxes, letters and emails " Responds to phone calls, walk ins, visitors and written requests for information " Maintains invoice logs and ensures invoice accuracy. . Creates spreadsheets and presentations for executives TJ Maxx | Sales-Cash Office Associate | Greenbelt, MD | July 2012  April 2018. . Ensured customer satisfaction . Handled money transports, change provision for registers, daily account reconciliation and payroll verifications " Intercepted phone calls in a professional manner providing answers and transferring calls when needed. . Trained new employees for cashiering and merchandising The Petey Greene Program | Tutor | Jessup, MD | September 2017 - December 2017. . Provided free quality tutoring to incarcerated people in preparation for GED testing & test taking strategies . Attended workshops focused on cultural humility, adult education, and criminal justice " Designed comprehensive worksheets for knowledge assessments. Imparted content area instruction for small groups or with individual students Northwestern University Summer Research | Scholar | Evanston, IL | June 2017 - August 2017. . Organized independent research on minority population in conjunction to social class and immigrant status . Interpreted and analyzed quantitative and qualitative results through Microsoft Office & SPSS. Presented PowerPoint research for Northwestern University Research Symposium to academics and general. public UMD | Undergraduate Research Assistant College Park, MD | August 2016  January 2017. . Arranged interview meetings for staff and faculty research participants through email correspondence . Compiled research literature in preparation for reports focused on the impact of disability on students' lives. . Advertised and attended student focus group workshops centered around disability and allyship EveryMind | Intern | Rockville, MDL June 2015  September 2015. . Consolidated hard copy data to electronic data using Excel program . Managed paperwork and updated client information in company database " Accomplished administrative tasks such as maintaining documents and corresponding messages. ACHIEVEMENTS. . Alpha Kappa Delta Society Member . Ronald E. McNair Post-Baccalaureate Achievement Program Scholar."""
 names = get_human_names(job_1)
 print (names)
@@ -151,48 +151,125 @@ for i in parse.street_addresses:
     job_2 = job_2.replace(i, "")
 
 
-job_3 = """At Measures for Justice (MFJ), our mission is to use data to measure and understand county-level criminal justice system performance in America. We collect, clean, code, and analyze county-level data to provide consistent, comparable, reliable, and objective performance measures across the entire criminal justice system, from arrest to post-conviction, on a county-by-county basis. You can learn more about our work here: https://www.measuresforjustice.org.
+job_3 = """**A-Line Staffing** is seeking a qualified candidate for the position of **UI
+Engineer** located in **Denver, CO**
 
-MFJ is committed to equality and inclusion. We encourage applicants from all backgrounds and experiences to apply. We support staff development and offer competitive pay and benefits.
+Please review the desired qualifications listed below and apply or contact
+**Nate Namiotka** with questions.
 
-Measures for Justice is seeking to hire a senior software developer to assist in our mission of delivering criminal justice data to our public data portal. In this role you will work with our Director of Data Engineering, Data Scientists, Researchers and technology team to design software to extend and scale our data processing infrastructure.
+The Role The UI Developer will play a key role in the development and
+maintenance of commercial software product(s) in building reliable, testable,
+scalable and high-performing enterprise class web applications for our global
+Fortune 500 customers. The successful candidate must be able to design,
+develop and automate the testing of responsive, front-end user interfaces
+across multiple browsers. You will work with all software product development
+disciplines (including UX, engineering, architecture, product owners, testers
+and analysts) to develop and maintain solutions that meet the needs of the
+business, utilizing industry standard best practices and modern software
+engineering techniques.
 
-Responsibilities:
+**Responsibilities include:**
 
-You will lead the development of an internal suite of web based tools that manage, update, version and publish our primary and supplemental data to help streamline our data processing pipeline.
-Build tools and processes to collect and integrate data from web APIs or datastores.
-Operationalize Machine Learning algorithms and processes to classify data.
-Skills:
+· Design, code, test and debug UI enhancements for commercial software
+product(s)
 
-A highly experienced software developer with a wide breadth of experience who provides leadership and mentors all other developers on the team.
-Demonstrable experience with delivering products on servers, web and web services.
-Very strong critical thinking skills and knowledge of software development best practices and design patterns.
-Solid experience with many different programing languages, libraries, tools and software development technologies. Java required, interest in learning Kotlin.
-Very strong experience in building highly scalable data oriented, cloud-based infrastructure products with Amazon Web Services (AWS).
-Computer Science Degree or equivalent software development experience.
-5 to 10 years experience.
-About us&
-As a developer you are one of our most valuable asset. We provide state of the art hardware and software to get the job done. Our Rochester, NY office space is close to all the things the city has to offer and is bike and bus accessible.
+· Partner with our UX team in the implementation of complex UI designs
 
-We offer competitive salaries, comprehensive benefits and and casual dress code in a professional environment. Our office is wheelchair accessible.
+· Drive maintainable and reusable solutions that are both secure and adhering
+to acceptable performance benchmarks
 
-Next steps&
-If you are interested, please apply here:
+· Embrace, implement and evangelize test automation as part of the fabric of
+the team
 
-https://measuresforjustice.forms.fm/senior-software-developer-2
+· Conduct code reviews for peers and/or junior team members
 
-We will continue to receive applications until the position is filled.
+· Participle in the evaluation of emerging technology and tools
 
-It is the policy of Measures for Justice to provide equal employment opportunity (EEO) to all persons regardless of age, color, national origin, citizenship status, physical or mental disability, race, religion, creed, gender, sex, sexual orientation, gender identity and/or expression, genetic information, marital status, status with regard to public assistance, veteran status, or any other characteristic protected by federal, state or local law. In addition, Measures for Justice will provide reasonable accommodations for qualified individuals with disabilities. We are committed to equity and inclusion and encourage candidates from diverse backgrounds and experiences to apply.
+ ****
 
-Job Type: Full-time
+**Requirements:**
 
-Experience:
+· Bachelor's degree and 4+ years of relevant hands-on experience in full User
+Interface development.
 
-Software Development: 5 years (Required)
-Location:
+· Must understand and have practiced UCD (user-centered design) concepts
 
-Rochester, NY 14607 (Required)"""
+· Experience with the latest ASP.NET 5, MVC and Web Pages
+
+· Applied knowledge of HTML5, CSS3, Java Script, Angular 2+, Data Tables,
+TypeScript and JQuery is required
+
+· Proficiency with code optimization and debugging technics with JavaScript,
+HTML and third-party libraries such as Angular, JQuery, etc.
+
+· Experience in responsive web application development (RWD) is required.
+
+· Excellent applied knowledge in writing cross-browser compatible code (IE,
+Chrome, Firefox, Safari).
+
+· Must be a creative and independent thinker who can work effectively in a
+team environment.
+
+· Experience implementing a well architected, componentized front-end system.
+
+· Experience with unit and system testing frameworks and techniques (e.g.
+Jasmine)
+
+· Experience with Software as a Service (SaaS), multi-tenancy application
+development
+
+· Experience with browser-based web applications delivered over the Internet
+that support high-volume user concurrency
+
+· Experience using Agile Scrum software development life cycle is a MUST.
+
+· Experience using source control management tools such as Microsoft Team
+Foundation Server (TFS)
+
+· Excellent organizational skills, multitasking ability and proven analytical,
+methodical thinking, problem solving and decision-making skills
+
+· Excellent verbal and writing skills, including the ability to research,
+design, and write new documentation, as well as to maintain and improve
+existing material
+
+· Experience working for a national or global commercial software product
+company requiring software product usage and high availability in a 24/7/365
+model.
+
+· Experience working with globally distributed business stakeholders and
+engineering teams
+
+· Experience working with collaboration and issue tracking tools such as
+Confluence and JIRA Experience working in a large, fast-paced project
+environment
+
+· Strong work ethic is a must
+
+· Proactive: Must be willing to seek out information and solutions that are
+pertinent to their responsibilities and key to their delivery
+
+· Must be willing to remediate code written by others
+
+· Team player attitude with a focus on the success of the team is a MUST
+
+· Must be able to work in a structured development environment and follow
+coding standards and design patterns.
+
+· Proactively collaborates with other teams/team members (UX, Enterprise
+Architecture, Quality Assurance, Product Owners, Business Analysts,
+Information Security, regional teams) across global time zones with the upmost
+professionalism, tact and resolve
+
+· Experience with Test Driven Development or Behavior Driven Development is
+preferred.
+
+· Experience developing applications requiring internationalization and
+localization for global markets is preferred.
+
+**I look forward to hearing from you soon!**
+
+**Nate Namiotka – A-Line Staffing**"""
 
 
 
@@ -223,7 +300,7 @@ docs[1] = [d.split(" ") for d in docs[1]]
 nd0 = []
 print (len(j1))
 for i in range(0, len(j1)-5):
-    nd0.append(j1[i:i + 5])
+    nd0.append(j1[i:i+5])
     # nd0.append([j1[i]])
 
 j1 = nd0
@@ -248,8 +325,14 @@ for z in j1:
             a = a / a_d
             e[i] = a
         x.extend(e)
+    if (len(x) != 0):
+        # print (sum(x))
+        # print (len(x))
+        rets.append(sum(x)/len(x))
 
-    rets.append(sum(x)/len(x))
+# rets = sum(rets)/len(rets)
+# rets = [rets]
+    # rets.append(sum(x)/len(x))
 
 # print (rets)
 # exit()
@@ -360,9 +443,9 @@ def display(sims):
 # print ("%s | %s: %s" % (save_docs[1], save_docs[2], sim[1]))
 # print ("%s | %s: %s" % (save_docs[2], save_docs[0], sim[2]))
 print (" ")
-display(sims)
-print (" ")
 display(sims2)
+print (" ")
+# display(sims2)
 
 
 # w2v_w1 = word2vec.predict([word1_p])

@@ -220,7 +220,7 @@ class ModelTrainer():
             # print (time.time() - start)
             self.experiment.log_metrics(metrics)
             self.model.save("trained/model_%s.h5" % e)
-            self.model.save("model.h5")
+            self.model.save("model2.h5")
             # keras.models.save_model(self.model, "model.h5")
             # self.model.save_weights('model_weights.h5')
 

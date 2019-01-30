@@ -15,6 +15,10 @@ from commonregex import CommonRegex
 from nameparser.parser import HumanName
 from nltk.corpus import wordnet
 
+from sklearn.manifold import TSNE
+
+import wmd
+
 # person_names=person_list
 person_list = []
 def get_human_names(text):
@@ -65,7 +69,7 @@ print ([layer.name for layer in x.layers])
 
 # word2vec = load_model("w2v.h5")
 
-word2vec = tf.keras.models.Model(inputs=x.input[0], outputs=x.get_layer("embedding").output)
+word2vec_model = tf.keras.models.Model(inputs=x.input[0], outputs=x.get_layer("embedding").output)
 # word2vec.save("test.h5")
 # word2vec = load_model("test.h5")
 # word2vec.compile(optimizer=keras.optimizers.Adam())
@@ -122,327 +126,72 @@ Preferred Qualifications
 
 
 What are my rewards and benefits?
-Discover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you’ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people."""
-# 
-job_1 = """Obinna Okonkwo. 9108 Jousting Lane, UPPER MARLBORO, Maryland, 20772 * 2405849193 * Obinna 2013@gmail.com. WORK EXPERIENCE. HOWARD UNIVERSITY, Washington, District of Columbia Operations Coordinator, Aug 2015 - Aug 2018. Work with internal team to ensure all visitors are receiving the service we expect. Handle equipment allocations, maintenance, inventory, and service timelines for all the Center's owned equipment.. Balance the needs of our customers with the needs of our operators; make the customer feel appreciated and heard while ensuring that internal operations are at the forefront of every decision.. T.A.G LABS INC, Washington, DC, District of Columbia Student Intern - Game Design Instructor, Mar 2017 - Dec 2017 . Provide a Safe and Fun Learning Environment for Students with the DC Public School system. Provide. students with meaningful background in programs such as Python, C  , Javascript, and Phasor. Contribute to the achievement of the organization's goals through instruction and commitment to T.A.G Labs Inc's the school's Principles. Student Intern - T.A.G Business Analyst, Jan 2018 - Aug 2018. . Strong attention to detail, highly organized and able to thrive in a busy, deadline driven atmosphere. Experience working with business users to gather requirements, writing functional and technical specifications and communicating technical requirements. Ability to grasp technical concepts and communicate to developers as well as communicate technical information to a non-technical audience.. Strong analytical skills, work ethic, independence, problem solving ability, and positive attitude. ENVIRONMENTAL HEALTH ENGINEERING SERVICES, Upper Marlboro, Maryland Industrial Hygenist, Jun 2014 - May 2018. . Operate and maintain instruments including sampling pumps, calibrators, noise dosimeters, sound level meters, and direct reading gas meters. Develop sampling strategies for industrial hygiene projects. Collect notes on activities performed by workers being monitored and/or maintain daily log of activities related to project work." Complete data sheets, chain of custody forms, and prepare samples for shipment to laboratory.. EDUCATION OXON HILL HIGH SCHOOL, Oxon Hill, Maryland High School Diploma, May 2013. HOWARD UNIVERSITY, Washington, DC, Maryland B.S in Electrical Engineering , May 2018. TOWSON UNIVERSITY, Towson, Maryland M.S in Computer Science Candidate, Expected graduation, May 2020. ADDITIONAL SKILLS . Python | C   | Microsoft Office Suite | Matlab | Agile Environment . Network  Certification *In Progress*."""
-job_1 = """Tucker Siegel
-Co-founder and Chief
-Technology Officer
-Tucker Siegel
-266 E Dudley Avenue
-Westfield, NJ 07090
-908.419.9415
-tuckers@krow.network
-siegel.tucker@gmail.com
-Skills
-Full stack developer with experience in languages ranging from
-Javascript to Python, as well as deep learning and artificial intelligence
-algorithms. Extensive experience in customer service and customer
-relations in a retail and services setting.
-Experience Krow Network / Co-founder and Chief Technology Officer
-August 2018 - PRESENT, NEWARK, NJ
-Leading multi-platform development to build a useable product for
-job seekers in the United States. Oversee all development of user
-facing and back-end services, and fully operate all artificial
-intelligence programs.
-Best Buy / Connected Devices Sales Consultant
-OCTOBER 2018 - PRESENT, UNION, NJ
-Develop relationships with customers to understand their situation and
-recommend the right solution. Implement sales tactics as well as sell
-recurring services and sign ups for the store credit card.
-Westfield, NJ /Intern at Technology Advisory Committee
-OCTOBER 2018 - PRESENT, WESTFIELD, NJ
-Meet with team members once a month to develop new technological
-solutions to current issues facing the town. Advise the mayor on
-budgeting concerns, and implementation of new ideas.
-Gold Medal Fitness / Member Services Representative
-MAY 2017 - PRESENT, GARWOOD, NJ
-Serve at the front desk for Gold Medal Fitness at the Garwood and
-Cranford, NJ locations. Responsible for handling member complaints,
-snack and beverage sales, and enrolling new members.
-ㅡ
-Education
-Westfield High School
-CLASS OF 2019
-Graduating with extensive classes in the STEM realm, and AP classes
-ranging from AP Statistics to AP Computer Science. Involved as Vice
-President of the STEM Club, as well as in the band program and multiple
-varsity sports.
-ㅡ
-Volunteer
-Westfield Presbyterian Church / Student Volunteer at Agape
-Community Kitchen
-SEPTEMBER 2012 - PRESENT, ELIZABETH, NJ
-Involved with providing a comfortable experience for the guests who
-come to the kitchen. Usually leading drinks preparation/serving or food
-preparation, and guiding newer members on how to do each job at the
-kitchen.
-Presbyterian Disaster Relief/ Student Volunteer
-JUNE 2017 - PRESENT
-Serve as student volunteer on two service trips, one to North Carolina
-after Hurricane Matthew, and one to Houston after Hurricane Harvey.
-Help rebuild damaged property, and create protective barriers incase
-another storm returns to the area"""
+Discover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you’ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people.
+"""
+import random
+job_2 = """Full stack developer with experience in languages ranging from Javascript to Python, as well as deep learning and artificial intelligence algorithms. Extensive experience in customer service and customer relations in a retail and services setting. Experience. Krow Network / Co-founder and Chief Technology Officer August 2018 - PRESENT, NEWARK, NJ Leading multi-platform development to build a useable product for job seekers in the United States. Oversee all development of user facing and back-end services, and fully operate all artificial intelligence programs. Best Buy / Connected Devices Sales Consultant OCTOBER 2018 - PRESENT, UNION, NJ Develop relationships with customers to understand their situation and recommend the right solution. Implement sales tactics as well as sell recurring services and sign ups for the store credit card. Westfield, NJ / Intern at Technology Advisory Committee OCTOBER 2018 - PRESENT, WESTFIELD, NJ Meet with team members once a month to develop new technological solutions to current issues facing the town. Advise the mayor on budgeting concerns, and implementation of new ideas. Gold Medal Fitness / Member Services"""
 
 
+docs = [
+    """Obinna Okonkwo. 9108 Jousting Lane, UPPER MARLBORO, Maryland, 20772 * 2405849193 * Obinna 2013@gmail.com. WORK EXPERIENCE. HOWARD UNIVERSITY, Washington, District of Columbia Operations Coordinator, Aug 2015 - Aug 2018. Work with internal team to ensure all visitors are receiving the service we expect. Handle equipment allocations, maintenance, inventory, and service timelines for all the Center's owned equipment.. Balance the needs of our customers with the needs of our operators; make the customer feel appreciated and heard while ensuring that internal operations are at the forefront of every decision.. T.A.G LABS INC, Washington, DC, District of Columbia Student Intern - Game Design Instructor, Mar 2017 - Dec 2017 . Provide a Safe and Fun Learning Environment for Students with the DC Public School system. Provide. students with meaningful background in programs such as Python, C  , Javascript, and Phasor. Contribute to the achievement of the organization's goals through instruction and commitment to T.A.G Labs Inc's the school's Principles. Student Intern - T.A.G Business Analyst, Jan 2018 - Aug 2018. . Strong attention to detail, highly organized and able to thrive in a busy, deadline driven atmosphere. Experience working with business users to gather requirements, writing functional and technical specifications and communicating technical requirements. Ability to grasp technical concepts and communicate to developers as well as communicate technical information to a non-technical audience.. Strong analytical skills, work ethic, independence, problem solving ability, and positive attitude. ENVIRONMENTAL HEALTH ENGINEERING SERVICES, Upper Marlboro, Maryland Industrial Hygenist, Jun 2014 - May 2018. . Operate and maintain instruments including sampling pumps, calibrators, noise dosimeters, sound level meters, and direct reading gas meters. Develop sampling strategies for industrial hygiene projects. Collect notes on activities performed by workers being monitored and/or maintain daily log of activities related to project work." Complete data sheets, chain of custody forms, and prepare samples for shipment to laboratory.. EDUCATION OXON HILL HIGH SCHOOL, Oxon Hill, Maryland High School Diploma, May 2013. HOWARD UNIVERSITY, Washington, DC, Maryland B.S in Electrical Engineering , May 2018. TOWSON UNIVERSITY, Towson, Maryland M.S in Computer Science Candidate, Expected graduation, May 2020. ADDITIONAL SKILLS . Python | C   | Microsoft Office Suite | Matlab | Agile Environment . Network  Certification *In Progress*.""",
+    """Tucker Siegel Co-founder and Chief Technology Officer. Tucker Siegel 266 E Dudley Avenue Westfield, NJ 07090. 908.419.9415 tuckers@krow.network siegel.tucker@gmail.com. Skills. Full stack developer with experience in languages ranging from Javascript to Python, as well as deep learning and artificial intelligence algorithms. Extensive experience in customer service and customer relations in a retail and services setting. Experience. Krow Network / Co-founder and Chief Technology Officer August 2018 - PRESENT, NEWARK, NJ Leading multi-platform development to build a useable product for job seekers in the United States. Oversee all development of user facing and back-end services, and fully operate all artificial intelligence programs. Best Buy / Connected Devices Sales Consultant OCTOBER 2018 - PRESENT, UNION, NJ Develop relationships with customers to understand their situation and recommend the right solution. Implement sales tactics as well as sell recurring services and sign ups for the store credit card. Westfield, NJ / Intern at Technology Advisory Committee OCTOBER 2018 - PRESENT, WESTFIELD, NJ Meet with team members once a month to develop new technological solutions to current issues facing the town. Advise the mayor on budgeting concerns, and implementation of new ideas. Gold Medal Fitness / Member Services Representative MAY 2017 - PRESENT, GARWOOD, NJ Serve at the front desk for Gold Medal Fitness at the Garwood and Cranford, NJ locations. Responsible for handling member complaints, snack and beverage sales, and enrolling new members.""",
+    """NURSING TEMPLATE. 500 Resume Sample Road Atlanta, Georgia (123) 123-1234 sample.nurse resume.com. Summary. Awarded Northside Hospital, Nurse of the Year. Awarded Atlanta Medical Center, Preceptor of the Year. Dedicated, compassionate, knowledgeable Registered Nurse with over 13 years of experience, 10 of those years in the critical care setting. Meticulously detail-oriented, observant and proactive. Performs well in high pressure, fast paced environment. Skilled in working with doctors for efficient patient management and a team player who is able to relate well with coworkers Special practice in the cardiac cath/EP labs and post op recovery of cath/EP patients. Experience in TAVR surgeries. Experience in Preop / PACU areas specializing in ENT, eye. orthopedic, and GYN surgeries. Education. Georgia State University, Atlanta, Georgia BSc. Nursing Graduated - May 2004. Employment History. Surgecenter of Louisville, Louisville, Kentucky Preop Nurse /PACU Nurse January 2017 - Present I am currently working in an outpatient surgery center in both the Preop and the Post Anesthesia Care Unit (PACU) departments. We have four operating rooms and specialize in eye, ENT, orthopedic, and gynecological surgeries. I work closely with the center's physicians and anesthesiologists. I care for infants, children and adults. Atlanta Medical Center, Atlanta, Georgia Registered Nurse / Staff Nurse October 2014 September 2017 I worked in a fast paced 5 room cath lab. We performed up to 30 cases daily which varied from diagnostic caths to ablations, to peripheral cases, to Anari procedures. I was also a part of Atlanta Medical Center's STEMI team. Atlanta Medical Center is one of the few hospitals in Georgia to receive accreditation as a heart attack receiving closely with both physicians and my coworkers to care for my patients to the best of my ability. I was also on the Quality council and worked closely with Unit Based Shared Governance.""",
+    """Sagar Solanki. Somerset, New Jersey, 08873. (732)-357-5215, ss3236@njit.edu. Skills & Qualifications:. Engineering Skills: AutoCAD; SolidWorks; Creo; TurboCAD; Geometric Dimensioning &. Tolerancing (GD&T); MATLab; LT Spice IV; Computer Numerical Control (CNC) machining; CutRite; Router-CIM; WordPress Programming; html programming. Key Abilities & Qualities:. Analytical; detail oriented; eager to learn; tech savvy; well organized; written and verbal communication skills; problem-solving, multi-tasking ability; team player; quick learner; good people skills, and leadership skills; respectful; responsible; self-motivated; accountable and ambitious. Languages: Fluent in English, Gujarati, and Hindi. Education: New Jersey Institute of Technology, Newark, NJ Bachelor of Science in Mechanical Engineering. May 2019 [Expected]. Raritan Valley Community College, Branchburg, NJ Associate in Physics and Mathematics. May 2015. Professional Experience: Multi-Housing Depot (Burlington, NJ): Intern-Project Management. June 2018  Present. . . Utilized AutoCAD and SolidWorks to design current and upcoming products to manufacture. Applied CNC and created manuals and maintenance procedure cards for all machines on site. Helped expand the company by making it efficient with various improvement designs. Created Job Task Analysis for all positions in the company Trained incoming employees and became a decision maker and troubleshooter during shifts. Created and developed an apprenticeship program with a local community college. . . Leadership Experiences:. . President of Student Activities Council at NJIT - leading, advising, programming and financial related duties with $250K, other E-board positions includes Treasurer and Webmaster. President of the RVCC Improv club E-board positions held for University organizations like the Engineering club, TWLOHA, and the Programing at RVCC. Other Experiences:. . Auto mechanic at Manville Auto & 27 Auto. Radio Jockey and advertisement consultant for at EBC Radio (1160AM). Construction volunteer for Habitat for Humanity of Raritan Valley. .""",
+    """ASHLEY D.RICE. 3555 Snowbell Ct. Waldorf, MD 20602. Tele: 478-662-7007 Email: adrice1977@yahoo.com. OBJECTIVE: To work in a diverse environment, fully utilizing my high skill levels, experience and. education. EXPERIENCE SUMMARY. Over 7 years of software quality assurance, testing and project management experience in a wide variety of environments. Proven experience in client relations, functional and workflow analysis, requirement specification tracing, design and implementation of application testing, and creating and reviewing end-user documentation. Knowledge and experience is not only limited to information systems but extends outward to business and leadership skills. Possess skills in streamlining operations, increasing efficiency and improving overall product quality. Key experience and understanding in the different aspects of business such as accounting, management, strategic planning and innovation and Quantitative Analysis. Able to demonstrate a clear understanding of the different elements of business required to make a successful organization and become a large asset to any organization. EDUCATION . Colorado State University Global Campus: Master of Science Management - Green Wood. Village, CO June 2017 . Colorado State University Global Campus: Bachelors of Science Information Technology -. Green Wood Village, CO - June 2015. SECURITY CLEARANCE Active Public Trust - Granted by United States Postal Inspection Service (USPS). PROFESSIONAL EXPERIENCE AT&T Government Solutions, VA, 06/14 - 09/17 IV&V Software Quality Assurance Analyst/Program Manager . Liaison between suppliers and stakeholder organization members to ensure all phases of the SDLC. are properly completed. Responsible for the daily management of multiple project schedules, testing and overall progression throughout the USPS SDLC process. Examined documents prepared for various projects to ensure technical accuracy, readability, and completeness. Generated Technical Analysis Reports based on technical analysis of program documentation deliverables. Reviewed, verified, and validated all SDLC documentation. Coordinated changes for documentation and project objectives with stakeholders. Responsible for ensuring requirements traceability throughout all SDLC documentation including test. cases and test results. . Responsible for ensuring software requirements completely identify the functionality for the system. and that all requirements have successfully been tested and have passed. Active participant in software testing activities in various locations. Active participant in various technical meetings at the vendor and customer sites. Performed IV&V and test activities including evaluating software, procedures, designs, and follow SDLC processes for multiple projects. Experienced in Serena TeamTrack. Ashley D. RicePage 1.""",
+    """ETHAN WOLF 40 Evergreen Drive North Caldwell, NJ, 07006 973-464-7020 | elw83@pitt.edu EDUCATION Bachelor's Degree  Class of 2021 The University of Pittsburgh School of Business . Major: Marketing. Certificates: Communications and Digital-Media. SKILLS & ABILITIES. Word Excel PowerPoint Leadership. Time Management EXPERIENCE. Summer Internship- Free Country (June 2018- August 2018). o Worked on Sports Marketing Project o Talked with sports teams around the country to work on proposals. for advertising in stadiums o Worked on improving social media presence Intern with Pittsburgh Hillel (August 2018-Present). O Meet with students to discuss life on campus. O Recruit kids to come to Hillel events Juscollege Intern (June- Present). O Work on planning a spring break trip for the University of Pittsburgh O Recruit students to become Juscollege representatives. O Recruit students to sign up for trip . Summer Internship-Philadelphia Soul (July 2016 August 2016). O Sold ticket packages to various companies O Analyzed team's statistics. o Updated social media pages . Current Recruitment Chair and on E-board for Zeta Beta Tau . Active Member of Sports Business Association. Volunteer-Friendship Circle (2013-2017) . Volunteer-Teen Buddy (2012-2017).""",
+    """Sample Entertainment Resume. Tanya Ramirez 1427 S. Robertson Blvd. #20 Los Angeles, CA 90066. (323)406-7822 ttorres@gmail.com. Objective. To obtain an internship in a film production company. Skills. Office Skills: Office procedures, handling telephones, customer service, basic office machinery Computer: MS Word, PowerPoint, Excel, the Internet. Oral and Written Communication: Good writing and editing skills . Literature: Foundation in World and American Literature . Bilingual: Spanish and English " Knowledge of film history " Personal: Get along well with others, excellent work habits, very reliable. Education. Liberal Arts Major, Santa Monica College, 2008 to present Courses related to major: Film History Studies (2 courses), American and World Literature, communications, psychology, history, music history and other classes. Have completed approximately 30  units at Santa Monica College. Goal: Plan to transfer to a university to complete a Bachelor of Arts Degree. Experience. Cashier and Customer Service, Johnny's Pizza, 2007 - present Duties: Take food orders, handle cash register, provide customer service, and make deliveries. Camp Counselor, YMCA Camp, Los Angeles, CA, summers of 2006 and 2007 Duties: Handled groups of elementary school youth a summer camp, supervised hiking, campfire sessions, sports activities, crafts, etc. Activities. . Film Club Member: Worked with group to produce a short film; acted as camera. assistant. . College Club Treasurer, 2008  2009. References. Available upon request.""",
+    """CV SAMPLE. JUAN GARCIA (217) 123 - 4567 � jgarcia@illinois.edu. Expected Fall 20XX. EDUCATION Doctor of Philosophy in Civil and Environmental Engineering University of Illinois at Urbana-Champaign. Dissertation title: Visualizing Geotechnical Engineering Principles. Advisor: Professor Ted S. Visor Bachelor of Science in Civil Engineering Universidad Nacional de San Juan, San Juan, Argentina (UNSJ). May 20XX. RESEARCH INTERESTS Investigations to improve seismic force-resisting systems through simulations and various visualization techniques. RESEARCH EXPERIENCE Graduate Research Assistant. 20XX - Present Department of Civil Engineering, University of Illinois . Design and execute small-scale testing to validate control algorithms derived to. simulate seismic force-resistance. Contribute to multi-disciplinary project aimed at developing visualizations and simulations to predict seismic force damage to various materials. Collaborate and coordinate with faculty, staff scientists, and fellow graduate students. across departments. Undergraduate Consultant. 20XX Departamento de Ingenier�a, UNSJ. Selected by the General Director of the City Planning Department of San Juan, to participate in the structural analysis and seismic assessment of the Dr. Guillermo Rawson Hospital, one of the largest construction projects to date in the most hazardous seismic area in Argentina. Collaborated with two other members of a team to carry out a nonlinear static analysis of the structure - primary objective and main focus of the project - in. agreement with FEMA 356 Pre-standard for the Seismic Rehabilitation of build. Spring 20XX - Present. Spring - Fall 20XX. TEACHING AND MENTORING EXPERIENCE Teaching Assistant, Introduction to Structural Engineering College of Engineering, University of Illinois . Prepared lectures and class activities focusing on the analysis of determinate and. indeterminate structures for 15-25 freshman and sophomore level undergraduates. Created and graded course assessments to ensure students understood material and. stayed on track. . Recognized as List of Teachers Ranked Excellent by Their Students. Instructor, Latino/a Culture Anthropology Department, University of Illinois . Integrated multimedia approaches and used instructional technology to enhance. pedagogical approach. Explained challenging concepts using planned lessons, assignments and targeted. discussions for 75 freshmen and sophomore students. Graduate Mentor, Illinois Summer Research Opportunities Program The Graduate College, University of Illinois . Mentored two undergraduate students in data collection and analysis to visualize the. properties of various geotechnical materials. . Guided the students in preparation and presentation of research findings. Summer 20XX, 20XX. grad. illinois.edu/Career Development.""",
+    """FIRSE YEER 5032 Forbes Avenue, SMC 1111 . Pittsburgh, PA 15289 . (412) 123-4567. freshman@gmail.com EDUCATION Carnegie Mellon University, Pittsburgh, PA Bachelor of Science in Business Administration Pine-Richland High School, Gibsonia, PA High School Diploma with Honors, 3.9/4.0 GPA National AP Scholar, National Honor Society. May 2018. May 2014. EXPERIENCE The Tartan, Pittsburgh, PA Advertising Staff and Staff Artist. Sept. 2014-present . Work with businesses and campus organizations to place their advertisements in The Tartan. Answer inquiries from advertisers regarding procedures and other newspaper information . Work with business department and editorial staff members to finalize and confirm all advertisements . Compile past advertising data for future adjustments in prices and advertising options Kumon Learning Center, Gibsonia, PA Teaching Assistant. Apr. 2011-Aug. 2014 . Helped students to complete and understand their assignments in math and reading, while encouraging them. to develop independent learning and critical thinking skills Global Marketing, Inc., Wexford, PA Marketing Intern. June 2013-July 2013 . Collaborated with restaurants, venues, and universities in the Greater Pittsburgh area to promote their. facilities in the 2013 city marketing brochure . Revised the company statement in the 2013 brochure to reflect current projects and strategies . Edited the monthly newsletter and managed social media sites such as Twitter and Facebook to advertise. events and promotions in downtown Pittsburgh. ACTIVITIES Smart Woman Securities Member. Sept. 2014-present . Attend a seminar series with professors to learn about the investment research and asset allocation process . Use knowledge from the seminar series to research a company's stock for an investment project Future Business Leaders of America Competitor and Member. 011-June 2014 Competed in global business events at the regional and state levels in 2012-2013; achieved 1st place in Pennsylvania and advanced to the national competition Competed in an economics event at the National FBLA convention in Florida in the summer of 2012. Learned about topics in macroeconomics, microeconomics, management and marketing . Helped to organize fundraising events, generating $500 towards annual trips to state and national. competitions Operation Smile Event Coordinator. Sept. 2012-June 2014 . Planned and organized six events that raised approximately $1,000 to contribute to the Operation Smile cause. and promoted the organization's mission to the school and local community. SKILLS Microsoft Excel, Access and PowerPoint, Python, DoubleClick for Publishers.""",
+    """Milad Mirghahari milad @krow.network. (973) 123 4567. Newark, New Jersey About. Experienced Entrepreneur, Founder, and Franchise Owner with a demonstrated history of working. in the tech and restaurant industry. sdfsijdflksdjfklsdjlfkdjsfkldsjfkldsjklfjdsklfjdslkfjds Education. New Jersey Institute of Technology Computer Science September 2017 to May 2021 West Essex Regional High School Diploma September 2013 to June 2017 Albert Dorman Honor's College Honor's Diploma. September 2018 to May 2021 Experience. Krow November 2018 to Present Founder of a web application that helps individuals create their resume. Startup consists of 6 people. Skills: Python, Ex Subway June 2015 to Present Manage the success of 2 Subway franchises through managing sales, hirings, and training suited Sandidatechnology Observer September 2018 to Present Writing articles for the technology observer (magazine) at the New Jersey Institute of Technology. Skills: Web Design. K. KROW.""",
+    """Jimmy Lu. 797 Delalla Terrace Ridgefield, NJ 07657. Phone: 952-715-7239 Email: luqian0618@hotmail.com. Objective. Obtain a software engineer position where I can expand my skills and knowledge in challenging problem and find solutions. Education New Jersey Institute of Technology, Newark, NJ. Fall 2018 BS, Computer Science and Computational Mathematics (Double major). GPA: 3.730 Relevant coursework: Programming Language Concepts, Principles of Operating System, Computer. Org. & Architect, Foundation of Computer Science II and Data Management System Design. Skills. Programming Languages: JavaScript, SQL, Java, Python, Bash, C, and C   Applications: MySQL, Node.js, Sequelize.js, TensorFlow, React.js, Git, Gradle, Spring and Splunk. Languages: Fluent in Mandarin and English. Work Experience. IT Intern Teachers Insurance and Annuity Association (TIAA), Iselin, New Jersey June 2018  August 2018. . Developed automation program using Gradle and Java that assisted developer collecting data . Worked in critical applications to debug user interface design flaw " Closely worked with manager to understand the role and importance of production support " Learned and presented to manager how communications system operates within TIAA " Documented guide to setup communications system for future developers. Research Experience/Project Participatory Learning Approach. May 2016 - Present Ronald E. McNair Post-Baccalaureate Achievement Summer Research Program. . Designed and implemented user interface using React.js for data reallocation . Designed and deployed user testing to identify system flaws " Assisted in conceptualizing, designing and optimizing APIs " Assisted in expanding an educational method to support complex workflow structure " Managed MySQL databases involving complex table relations. July, 2016. Presentation. NJIT Ninth International Undergraduate Summer Research Symposium. . Building a Flexible and Collaborative Online Learning System Philadelphia AMP. . Awarded second place in Computer and Mathematical Sciences. October, 2016. Volunteer Experience Dinner with an Engineering. Summer, 2016 . Mentored and advised elementary school, middle school and high school students who are. interested in STEM fields Coding Camp for Young Women. Summer, 2016 . Advised high school students in finding their passion within STEM fields.""",
+    """JASON LABOY 5 Hickory Court Barnegat, NJ 08005. Tel.: (609) 489-2640 E-mail: Jason Laboy96@outlook.com. 9/2017-5/2020. EDUCATION. New Jersey Institute of Technology | Newark, NJ . B.S. in Computer Science. Overall GPA 3.94 Ocean County College Toms River, NJ. A.S. in Computer Science Overall GPA 4.00 Honors: Phi Theta Kappa, Summa Cum Laude. 9/2015-5/2017. 9/2013-6/2015. Ocean County Vocational Technical School Toms River, NJ. Computer Science certification Local Skills USA web design champion and State contestant. KEY COURSES:. Data Structures and Analysis, Programming 2, Networking 1. Intro to Visual BASIC, Flash & Scripting Programming, Web Development Fundamentals, Computer Organization, and. Calculus 3. VOLUNTEERING AND ACTIVITIES. Skills USA web design local champion and state contestant. NJIT Residence Hall Association programing committee. NJIT Laurel Hall Council RHA representative. NJIT Residence Hall Association Membership officer. NJIT Highlander Helper 2018 TECHNICAL SKILLS. Visual Studio, Eclipse and Net beans. Computer Repair Skills. Java, C  , C#, VB.NET, Python, CSS, JavaScript, PHP, XML, and HTML. EXPERIENCE Rite Aid Barnegat, NJ. 11/2014-8/2017 & 5/2018-8/2018 -Front End Associate . Provide excellent customer service. . Consummate sales transactions with customers. Barnegat Township School District | Barnegat, NJ. 7/2014-8/2014 -Summer Technology Intern . Serviced equipment and maintained software applications. Participated in system maintenance, and troubleshooting, NJIT Office of Student Life Newark, NJ. 9/2018-Current -Programming Assistant. Provide support to areas of student life when needed. Provide administrative support such as answering phone calls and emails, filing, managing printing services, purchasing and distrib.tinn af materiale.""",
+    """Quazi B. Dye. 23-57 101 Street . East Elmhurst NY 11369 . (718) 803-3057. Quazidye@yahoo.com. SUMMARY Resourceful and results-driven young professional with experience in managing. office operations in results driven campaign office environment. Proven track record of professionalism, integrity, and creativity in office functions. Competent at assigning duties to staff and liaising with customers and stakeholders. Demonstrated ability to prioritize assignments and make effective. decisions. Professional Experience. Office Administrator Jeffrey Dye for City Council Passaic, NJ ! 11/10-5/2011. . Redesign office administrative procedures to modernize functions, eliminate redundancy and expedite workflow. Maintain supply and inventory of office related campaign merchandise. . Manage front desk area. . Type documents and correspondence. EDUCATION & CERTIFICATION Clara Muhammad High School, Corona NYHigh School Diploma  2012. Certificates Obama Award of Academic Achievement. TECHNICAL EXPERTISE. . Outlook, Word, Excel, and PowerPoint . Video conferencing, support (Skype, Hangouts, Facetime) " Typing speed: 60 WPM. VOLUNTEER EXPERIENCE. Jeffrey Dye for board of education 1/2006-5/2006. Passaic, NJ. Green Hope Services for Women 5/2012-09/2014. Harlem, NY. North Jersey Residents Work Force Board 4/2008-present Passaic, NJ. Julissa Ferreras-Copeland 2/2011-4/2011. East Elmhurst, NY. Jeffrion Aubry. 2/2011-04/2011. East Elmhurst, NY. References: Available upon request.""",
+    """6 Wilfred Street Montclair, NJ 07042 973.746.9606 973.509.4001 Email: ssanders@montclair.k12.nj.us. SSSSJM@aol.com Shirlene Powell-Sanders. Professional Objective: To secure a position where my experiences can be utilized to support a school community to include students, parents, staff and administration. Education 1969-1973. William Paterson College, Wayne, NJ B.A., Special Education and Elementary Education. 1985-1987. William Paterson University, Wayne, NJ M.A., Principal and Supervision. Certifications. New Jersey, Teacher of Handicapped, 1973 New Jersey, Elementary Teacher, 1973 New Jersey, Supervisor, 1987 New Jersey, Principal, 1987. Membership National Association of Secondary School Principals Montclair Principal's Association New Jersey Education Association. Professional Educational Experiences. 2007-Present. Assistant Principal at Montclair High School . Directly responsible for the supervision of 500  students, 2 Guidance Counselors and. Student Assistance Counselor within the Team Office Structure Liaison to Montclair State University Partnership through the Center of Pedagogy Assisted teachers in the development/writing of NJDIE Student Growth Objectives Team Member supporting all aspects of the overall functioning of the School Building to include short and long term goal setting Trained in administration of the PARCC Trained in Response to Intervention Supervision of the School Emergency Team SY 07-11 Supervisor of the Security Staff Supervisor of the English Department SY 11-12 and 12-13 Supervisor of the Business/Technology Department SY 13-14 Developed a Discipline Program for total school use supported by components of Canter's Assertive Discipline Program Supervised Team Intervention & Referral Service and 504 Meetings Preparation and distribution of the MHS Parent/Caregiver Information Packet. Responsible for the Discipline for 1500  students Grade 10-12 for SY 2013-Present . Responsible for the composition, development and distribution of all building level. forms. Developed and implemented use of classroom Student Sign-In/Out Booklet.""",
+    """MARY AYEGBUSI (240) 550-3101 m.ayegbusi@gmail.com. EDUCATION University of Maryland, College Park (UMD) B.A. Sociology, Philosophy - May 2016 University of Maryland, College Park (UMD) M.A. Education Policy - Present. PROFESSIONAL EXPERIENCE American Federation of Teachers Education Policy Research Intern | January 2018 - Present . Research, review and track data to analyze various trends in PreK-12 education. Collect data on in-depth interviews and survey questionnaires of focus groups with union affiliates . Provides analysis of policies and regulations including the No Child Left Behind Act (NCLB), the. Department of Education's Office of Civil Rights regulations, state formative and summative assessments under the Every Student Succeeds Act (ESSA), and recent state legislations on parental involvement. Institute for Educational Leadership | Education Policy Program Intern | September 2017- December 2017 . Assisted programs including preparing materials and logistics for meetings; other operational activities. included updating web pages and social media as well as writing and editing blogs on school improvement . Provided research assistance and edited documents, policy briefs, and publications. Modern Muse Education | Educational Program Associate (Temporary) | June 2017 - November 2017. . Maintained company's calendar, social media pages, emails and phone calls . Conducted strategic market research for points of improvement " Liaised between the company, public school districts and various nonprofit organizations " Designed programs and initiatives, drafted proposals, and coordinated speaking event preparations. Montgomery County Public Schools | Special Education Paraeducator (August 2016- June 2017. . Assisted teachers with grading and instruction for small groups or with individual students . In collaboration with the classroom teacher, implemented consistent reinforcement of appropriate student. behaviors, as well as management strategies for students experiencing difficulties . Implemented student Behavior Intervention Plan (BIP) across all settings to manage inappropriate student. behaviors, including aggression and self-injury using proactive and responsive strategies. The Institute for Public Policy & Economic Development Research Intern June 2015 - August 2015 . Performed data analyses and summarized findings for the Socioeconomic and School Performance Report. and Education and Workforce Development Task Force Report Drafted a Green Building Report, which involved researching specific green building techniques, technologies, policies or programs used in different communities to encourage a more environmentally sustainable community in Northeastern Pennsylvania. PROGRAMS SPSS, Microsoft Office (Word, Excel, Outlook and PowerPoint), Social Media/Outreach (Hootsuite, Surveymonkey, MixMax, Twitter, Facebook and LinkedIn)."""
+    """JEFFREY DYE. 443 Howe Avenue Passaic, New Jersey 07055. (862) 668-6070. Obiective Seeking Employment as workforce Development Coordinator, will provide support to the Director of Workforce Development for a wide range of workforce service activities and day to day delivery of direct services to minority communities. Summary To change the lives of minority men & woman from hopelessness to prosperity, I am seeking a rewarding position where I am afforded the opportunity to cultivate relationships with local businesses in the skilled construction and laborer trades. In collaboration with the director of workforce development, I intend to leverage my position to recruit minority candidates for programs that aim to train & place qualified leads. Highlights of Qualifications:. . Experience in developing programs for succession planning and providing training to young adults Deep knowledge of workforce standards and organizational support staffing needs Operational knowledge of basic statics, policy context and workforce standards Remarkable ability to resolve complex problems in fast paced work environment Ability to understand current workforce frameworks and models Skilled to interpret and understand technology. Community and Volunteer Experience 2017-Present. President NAACP of Passaic, NJ 2013. Ran for Mayor in the City of Passaic 2005- 2011. Ran for Councilman in the City of Passaic 2006-2016. Ran for Passaic Board of Education 2005. Visibility Specialist for Governor Corzine in the City of Passaic. Professional Experience. 2017- Present NAACP of Passaic, NJ. Passaic, NJ President. . Organize and Unite the community for political empowerment . Engaged community, local and state institutions to partner with schools to provide supplemental. programs that support student achievement. Generated $10,000 in monetary and in-kind donations in conjunction with the Community Outreach. Team. 01/02 - Present Department of Workforce Development. Passaic, NJ Director. Maintained effective relationships with construction trade union hiring managers and developed strategies on recruitment. Coordinated site visits for potential construction trade hires Participated in meetings with managers and supervisors and maintained knowledge in various placement programs.""",
+    """CIDNEY M. KING. 15703 Swanscombe Loop, Upper Marlboro, Maryland, 20774. cidneyking@ifly-youth.org. (202) 738-6261. PROFESSIONAL EXPERIENCE. Founder & President. May 2017 Present iFLY Youth Inc.  Washington, D.C. Created iFLY Youth, an organization focused on providing middle school girls of color from underserved neighborhoods in the Greater Washington Area the opportunity to travel, serve, and learn internationally. Secured over $26,000 in seed funding from private foundations, corporations, and individual donors Work alongside and lead board of directors in managing and implementing all structural, financial, and operational processes and continually improve policies and procedures to further streamline efficient operations. Developed partnership with E.L. Haynes Public Charter School and piloted 6-day international travel experience to Costa Rica for 10 of their students. Manager of Operations & Community Engagement Chair. January 2017 Present Capital Village Schools - Washington, D.C. . Collaborate with a team of school leaders, community leaders, professionals and educators in the design and. launch of a network of micro-schools that will prepare all students, regardless of background or circumstance, to reach their full potential in college, career and life in order to become agents of change in their communities Facilitate strategic partnerships that will aid in building small learning communities focused on relevant realworld problems, personalized to each student's individual needs, and centered around the whole child Plan and execute community engagement events, including overseeing the budget, purchasing materials and onsite logistics Finalized student recruitment, enrollment and parent involvement plans for 4 week-summer pilot of Capital Village's school model. Manager of Recruitment. July 2016 May 2017 Teach for America  Washington, D.C. . Identified, cultivated, and influenced 19 diverse top-talent seniors from University of Maryland College Park. to apply to and join Teach For America through 1:1 meetings, ongoing phone/email outreach, classroom and student organization presentations, information sessions, campus events, social med networking Managed a team of 4 part-time student interns to reach rigorous weekly goals, create innovative events and marketing strategy, support pipeline development, and coach on how to build awareness of Teach For America and the issue of educational inequity on campus Utilized Salesforce to inform strategic decisions and track campaign actions, including pipeline development, event planning, relationship building, and confirmation. Mathematics Teacher. July 2014 July 2016 Al Badiya School -Al Wagon, United Arab Emirates . Scaffolded large learning tasks into meaningful and manageable segments for English second language. learners in 6th grade to ensure 100 percent of students achieved their individual growth goals Managed systems for tracking large amounts of data geared toward reaching an overall class goal of at least. 80 percent mastery of all math objectives . Observed teammates bi-monthly and offered constructive criticism for best practices to increase math literacy. and heighten student ownership of learning. English Language Arts Teacher. May 2012 July 2014 Walipp Preparatory Academy - Houston, Texas . Launched Leadership Atlanta Program, which provided 12 girls with the opportunity to travel to. colleges/universities in Atlanta, Georgia and spearheaded 12-thousand-dollar fundraising goal Created culturally relevant lesson plans for 130 students in grades 6th through 8th to ensure 100 percent of learners achieved a minimum of 75 percent mastery of each reading objective.""",
+    """Brittney M. Cofield-Poole Arlington, VA . 22204 . Tel: 216.392.0926 " Email: bcofieldp@gmail.com. PROFESSIONAL SUMMARY. Digital Equity Advocate, Community Psychologist and an Aspiring Filmmaker that aims to utilize empowerment centered strategies to address the gaps within mainstream media narratives, develop culturally relevant story platforms and support under-heard communities. EDUCATION. 06/2018. THE GEORGE WASHINGTON UNIVERSITY, Washington, D.C. Graduate Certificate, The Institute for Documentary Filmmaking Co-Produced Short Film: Bow With Me Production Roles: Director of Research, Writer & Sound Capture. 05/2016. NORTH CAROLINA STATE UNIVERSITY (NCSU), Raleigh, NC Ph.D., Concentration: Community Psychology Scholarly Focus: Digital Access in Metropolitan Communities. M.S., Concentration: Community Psychology Scholarly Focus: Civic Engagement among Black Youth. LOYOLA UNIVERSITY CHICAGO (LUC), Chicago, IL B.S., Concentration: Psychology. 05/2008. PROFESSIONAL EXPERIENCE FREELANCE PRODUCTION ASSISTANT. 07/2018-Present. SPARK MEDIA, Washington, DC. 02/2018 - 04/2018 Intern Pre- Production Researcher (contract). 06/2018-Present Served as team support in progressing forward film distribution, editing, rough-cut reviews, and topic research. K4CONNECT, Raleigh, NC. 12/2015 - 12/2017 Director of Client Experience Developed digitally holistic support strategies for engaging, informing and empowering the client base for a smart home technology company serving older adults and individuals living with disabilities. Managed the development of client communication plans, civic centered technical innovation and project planning. Delivered practical recommendations for improving client experience, company progression and increasing social impact. . Produced digital content to serve, support and educate community partners. . Developed client experience informed strategies for product innovation and improvement. " Organized and facilitated client digital literacy training as well as develop engagement process flows. CITY of RALEIGH, Information Technology Department, Raleigh, NC. 09/2012 - 11/2015 Community Outreach Specialist Provided seamless instructive support for municipal led youth and community programming. Managed the development of instructional strategies, course materials, appropriate integration of instructional technologies, community development research, and best practices for community digital inclusion. . Facilitated youth digital citizenship workshops for Community, Parks & Recreation and IT departments. . Provided evaluative research support for the implementation of the Raleigh Digital Connectors youth program.""",
+    ]
 
-# job_1 = """CIDNEY M. KING. 15703 Swanscombe Loop, Upper Marlboro, Maryland, 20774. cidneyking@ifly-youth.org. (202) 738-6261. PROFESSIONAL EXPERIENCE. Founder & President. May 2017 Present iFLY Youth Inc. - Washington, D.C. Created iFLY Youth, an organization focused on providing middle school girls of color from underserved. neighborhoods in the Greater Washington Area the opportunity to travel, serve, and learn internationally. . Secured over $26,000 in seed funding from private foundations, corporations, and individual donors. Work alongside and lead board of directors in managing and implementing all structural, financial, and operational processes and continually improve policies and procedures to further streamline efficient operations. Developed partnership with E.L. Haynes Public Charter School and piloted 6-day international travel experience to Costa Rica for 10 of their students. Manager of Operations & Community Engagement Chair. January 2017 Present Capital Village Schools - Washington, D.C. Collaborate with a team of school leaders, community leaders, professionals and educators in the design and launch of a network of micro-schools that will prepare all students, regardless of background or circumstance, to reach their full potential in college, career and life in order to become agents of change in their communities Facilitate strategic partnerships that will aid in building small learning communities focused on relevant realworld problems, personalized to each student's individual needs, and centered around the whole child Plan and execute community engagement events, including overseeing the budget, purchasing materials and onsite logistics Finalized student recruitment, enrollment and parent involvement plans for 4 week-summer pilot of Capital Village's school model. Manager of Recruitment. July 2016 May 2017 Teach for America  Washington, D.C. Identified, cultivated, and influenced 19 diverse top-talent seniors from University of Maryland College Park to apply to and join Teach For America through 1:1 meetings, ongoing phone/email outreach, classroom and student organization presentations, information sessions, campus events, social media, and faculty networking Managed a team of 4 part-time student interns to reach rigorous weekly goals, create innovative events and marketing strategy, support pipeline development, and coach on how to build awareness of Teach For America and the issue of educational inequity on campus Utilized Salesforce to inform strategic decisions and track campaign actions, including pipeline development, event planning, relationship building, and confirmation. Mathematics Teacher. July 2014 July 2016 Al Badiya School -Al Wagon, United Arab Emirates . Scaffolded large learning tasks into meaningful and manageable segments for English second language. learners in 6th grade to ensure 100 percent of students achieved their individual growth goals . Managed systems for tracking large amounts of data geared toward reaching an overall class goal of at least. 80 percent mastery of all math objectives Observed teammates bi-monthly and offered constructive criticism for best practices to increase math literacy and heighten student ownership of learning. English Language Arts Teacher. May 2012 July 2014 Walipp Preparatory Academy - Houston, Texas . Launched Leadership Atlanta Program, which provided 12 girls with the opportunity to travel to. colleges/universities in Atlanta, Georgia and spearheaded 12-thousand-dollar fundraising goal Created culturally relevant lesson plans for 130 students in grades 6th through 8th to ensure 100 percent of learners achieved a minimum of 75 percent mastery of each reading objective."""
-# job_1 = """NURSING TEMPLATE. 500 Resume Sample Road Atlanta, Georgia (123) 123-1234 sample.nurse resume.com. Summary. Awarded Northside Hospital, Nurse of the Year. Awarded Atlanta Medical Center, Preceptor of the Year. Dedicated, compassionate, knowledgeable Registered Nurse with over 13 years of experience, 10 of those years in the critical care setting. Meticulously detail-oriented, observant and proactive. Performs well in high pressure, fast paced environment. Skilled in working with doctors for efficient patient management and a team player who is able to relate well with coworkers Special practice in the cardiac cath/EP labs and post op recovery of cath/EP patients. Experience in TAVR surgeries. Experience in Preop / PACU areas specializing in ENT, eye. orthopedic, and GYN surgeries. Education. Georgia State University, Atlanta, Georgia BSc. Nursing Graduated - May 2004. Employment History. Surgecenter of Louisville, Louisville, Kentucky Preop Nurse /PACU Nurse January 2017 - Present I am currently working in an outpatient surgery center in both the Preop and the Post Anesthesia Care Unit (PACU) departments. We have four operating rooms and specialize in eye, ENT, orthopedic, and gynecological surgeries. I work closely with the center's physicians and anesthesiologists. I care for infants, children and adults. Atlanta Medical Center, Atlanta, Georgia Registered Nurse / Staff Nurse October 2014 September 2017 I worked in a fast paced 5 room cath lab. We performed up to 30 cases daily which varied from diagnostic caths to ablations, to peripheral cases, to Anari procedures. I was also a part of Atlanta Medical Center's STEMI team. Atlanta Medical Center is one of the few hospitals in Georgia to receive accreditation as a heart attack receiving closely with both physicians and my coworkers to care for my patients to the best of my ability. I was also on the Quality council and worked closely with Unit Based Shared Governance."""
-# job_1 = """Shawnee M. Johnson smjohnson3195@gmail.com. (240) 715-5853. www.linkedin.com/in/shawneemjohnson. EDUCATION: B. A. Sociology, University of Maryland, College Park (UMD) Relevant Courses: Social Psychology, Research Methods in Sociology, Social Stratification & Inequality, Writing For Non-Profits and Communication Core Competencies: Data entry & analysis, administrative support, excellent writing and communication skills and strong interpersonal skills Skills & Abilities: Advanced proficiency in Microsoft Office applications, Intermediate proficiency in SPSS & GSS, and novice comprehension of French & Spanish. EXPERIENCE Careers in Nonprofits | Administrative Assistant (Temporary) | Washington, D.C. | April 2018 - Present. . Schedules and coordinates meetings for executives and facilities . Sorts and distributes incoming communication data, including faxes, letters and emails " Responds to phone calls, walk ins, visitors and written requests for information " Maintains invoice logs and ensures invoice accuracy. . Creates spreadsheets and presentations for executives TJ Maxx | Sales-Cash Office Associate | Greenbelt, MD | July 2012  April 2018. . Ensured customer satisfaction . Handled money transports, change provision for registers, daily account reconciliation and payroll verifications " Intercepted phone calls in a professional manner providing answers and transferring calls when needed. . Trained new employees for cashiering and merchandising The Petey Greene Program | Tutor | Jessup, MD | September 2017 - December 2017. . Provided free quality tutoring to incarcerated people in preparation for GED testing & test taking strategies . Attended workshops focused on cultural humility, adult education, and criminal justice " Designed comprehensive worksheets for knowledge assessments. Imparted content area instruction for small groups or with individual students Northwestern University Summer Research | Scholar | Evanston, IL | June 2017 - August 2017. . Organized independent research on minority population in conjunction to social class and immigrant status . Interpreted and analyzed quantitative and qualitative results through Microsoft Office & SPSS. Presented PowerPoint research for Northwestern University Research Symposium to academics and general. public UMD | Undergraduate Research Assistant College Park, MD | August 2016  January 2017. . Arranged interview meetings for staff and faculty research participants through email correspondence . Compiled research literature in preparation for reports focused on the impact of disability on students' lives. . Advertised and attended student focus group workshops centered around disability and allyship EveryMind | Intern | Rockville, MDL June 2015  September 2015. . Consolidated hard copy data to electronic data using Excel program . Managed paperwork and updated client information in company database " Accomplished administrative tasks such as maintaining documents and corresponding messages. ACHIEVEMENTS. . Alpha Kappa Delta Society Member . Ronald E. McNair Post-Baccalaureate Achievement Program Scholar."""
-names = get_human_names(job_1)
-print (names)
-# exit()
-name = names[0]
-print (name)
-parse = CommonRegex(job_2)
-print (parse)
-# print (parse.names)
-# exit()
-for i in parse.phones:
-    job_2 = job_2.replace(i, "")
+w2vecs = []
+from word2vec import W2VDocument
+import matplotlib.pyplot as plt
+import scipy.stats as st
 
-for i in parse.emails:
-    job_2 = job_2.replace(i, "")
+w2v_ = W2VDocument(job_2, word2vec_model, w2v)
 
-for i in parse.street_addresses:
-    job_2 = job_2.replace(i, "")
+for i in docs:
 
+    w2v_1 = W2VDocument(i, word2vec_model, w2v)
+    w2vecs.append(w2v_1)
 
-job_3 = """Landscaper We are looking for an experienced and responsible landscaper to join our team. The ideal candidate will be comfortable operating lawn maintenance equipment such as lawn mowers, trimmers, and blowers.
+# w2v_.display_pca(w2vecs)
+# distribution = []
 
-The landscaper will ensure the growth and vibrancy of our plants, flowers, lawn, and decorative shrubs. The landscaper will water, fertilize, and prune to remove damaged or dying plant life. The candidate can expect to work outdoors in a mix of weather conditions, and be able to perform maintenance duties to ensure employee safety during inclement weather by removing debris, snow, and ice from communal walkways and spaces.
+# for i in w2vecs:
+#     x = w2v_.calculate_similarity(i)
+#     distribution.append(x)
 
-Landscaper Duties and Responsibilities
-Operate push or riding lawnmowers; may operate heavier tractor equipment if needed
-Water all plants and lawn, and ensure all plants are evenly covered
-Spread fertilizer, plant food, mulch, and other materials around plants
-Remove weeds and dead plants; prune overgrown limbs and leaves
-Operate string trimmer and edger to remove overgrowth and keep outdoor area tidy
-Use leaf blower to clear walkways and pedestrian areas after lawn maintenance
-Treat lawn and landscaping with pesticides to remove harmful insects
-Maintain the existing landscaping design and ensure plant survival
-Plant new flowers, bushes, plants, and decorative shrubs
-Rake fallen leaves and remove debris
-Keep pedestrian areas removed of snow and ice
-Operate heavier snow blowers or other equipment as needed
-Remove tree limbs, overgrowth, and other hazards
-Ensure outdoor furniture, décor, and lighting is maintained and good working order
-Properly store and handle all equipment, tools, sprinklers, etc.
-Oversee maintenance repairs to equipment, landscape structures, and hardscape walkways
-Landscaper Requirements and Qualifications
-High school degree or equivalent educational experience
-Previous experience in landscaping or groundskeeping a plus
-Must pass background check
-Must be 18 years of age
-Able to work independently
-Must be able to operate lawn maintenance equipment such as lawnmowers, string trimmers, leaf blowers, hedge trimmers, etc.
-Able to physically stand, bend, squat, and lift up to 40 pounds"""
+# # plt.hist(distribution, normed=True)
+# # plt.show()
+# distribution = np.array(distribution)
+# mean = distribution.mean()
+# std = distribution.std()
 
+# z_scores = (distribution - mean) / std
 
+# print (mean, std)
+# print (z_scores)
 
-docs = [job_2.lower(), job_3.lower()]
-j1 = nltk.sent_tokenize(job_1.lower())
-j1 = data_processor.clean(j1)[0]
-# print (j1)
-# exit()
-save_docs = ["j1", "j2", "Sales"]
+# percentiles = []
+# for i in z_scores:
+#     percentiles.append(st.norm.cdf(i))
+# print (percentiles)
+# print (distribution)
 
-# job_1 = nltk.sent_tokenize(job_1)
-# print (job_1)
-# print (docs[0])
-
-docs[0] = data_processor.clean([docs[0]])[0]
-# print (docs[0])
-docs[1] = data_processor.clean([docs[1]])[0]
-# docs[2] = data_processor.clean(docs[2])[0]
-
-
-# exit()
-## Split
-
-docs[0] = [d.split(" ") for d in docs[0]]
-docs[1] = [d.split(" ") for d in docs[1]]
-# docs[2] = [d.split(" ") for d in docs[2]]
-
-nd0 = []
-print (len(j1))
-for i in range(0, len(j1)-3):
-    nd0.append(j1[i:i+3])
-    # nd0.append([j1[i]])
-from sklearn.cluster import KMeans
-j1 = nd0
-print (nd0[:10])
-# print (np.array(j1).shape)
-j1 = [[d.split(" ") for d in a] for a in j1]
-# print (j1)
-j1 = [[[data_processor.subword(w, w2v) for w in d] for d in a] for a in j1]
-
-j1 = [[pad_sequences(d, maxlen=25, value=len(w2v), padding="post") for d in a] for a in j1]
-# print (j1)
-# print (np.array(j1).shape)
-rets = []
-for z in j1:
-    # print (np.array(z[0]).shape)
-    x = []
-    for b in z:
-        e = word2vec.predict(b)
-        # print (e)
-        for i in range(len(e)):
-            a = e[i]
-            a_d = np.linalg.norm(a)
-            a = a / a_d
-            e[i] = a
-        x.extend(e)
-        # print (x)
-    if (len(x) != 0):
-        rets.append(sum(x)/len(x))
-
-from sklearn.metrics import pairwise_distances_argmin_min
-
-print (len(rets))
-print (len(nd0))
-
-n_clusters = int(len(rets)**0.5)
-print (n_clusters)
-kmeans = KMeans(n_clusters=n_clusters)
-kmeans = kmeans.fit(rets)
-
-avg = []
-for i in range(n_clusters):
-    idx = np.where(kmeans.labels_ == i)[0]
-    avg.append(np.mean(idx))
-closest, _ = pairwise_distances_argmin_min(kmeans.cluster_centers_, rets)
-ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-print (ordering)
-print (closest)
-summary = '. '.join([nd0[closest[idx]] for idx in ordering])
-print (summary)
-exit()
-# print (rets)
-# exit()
-
-
-## Create subwords
-
-docs[0] = [[data_processor.subword(w, w2v) for w in d] for d in docs[0]]
-docs[1] = [[data_processor.subword(w, w2v) for w in d] for d in docs[1]]
-sd = docs
-
-## Pad
-
-docs[0] = [pad_sequences(d, maxlen=25, value=len(w2v), padding="post") for d in docs[0]]
-# print (docs[0])
-docs[1] = [pad_sequences(d, maxlen=25, value=len(w2v), padding="post") for d in docs[1]]
-# docs[1] = pad_sequences(docs[1], maxlen=25, value=len(w2v), padding="post")
-# print (docs[1])
-# docs[2] = pad_sequences(docs[2], maxlen=25, value=len(w2v), padding="post")
-# print (docs[2])
-# print (docs[0][:10])
-# print ( )
-# print (sd[0][:10])
-# exit()
-## Vecs
-
-vecs = [0, 0, 0]
-
-x = word2vec.predict(docs[0])
-
-for i in range(len(x)):
-    a = x[i]
-    a_d = np.linalg.norm(a)
-    a = a / a_d
-    x[i] = a
-
-# x = np.array(vecs[0])
-vecs[0] = sum(x)/len(x)
-# print (vecs[0])
-# print (np.array(vecs[0]).shape)
-x = word2vec.predict(docs[1])
-for i in range(len(x)):
-    a = x[i]
-    a_d = np.linalg.norm(a)
-    a = a / a_d
-    x[i] = a
-vecs[1] = sum(x)/len(x)
-
-sims = []
-# print (len(rets))
-for i in rets:
-    # print (i)
-    sims.append(calculate_similarity(i, vecs[0]))
-
-sims2 = []
-for i in rets:
-    sims2.append(calculate_similarity(i, vecs[1]))
-
-# sims = max(sims)
-
-
-# print (1/np.linalg.norm(vecs[0]-vecs[1]))
-# print (1/np.linalg.norm(vecs[1]-vecs[2]))
-# print (1/np.linalg.norm(vecs[2]-vecs[0]))
-
-# print(vecs[0])
-# print(vecs[2])
-
-## Sim
-
-# sim = [0, 0, 0]
-
-# sim[0] = calculate_similarity(vecs[0], vecs[1])
-# sim[1] = calculate_similarity(vecs[1], vecs[2])
-# sim[2] = calculate_similarity(vecs[2], vecs[0])
-
-# ## Display
-def get_max_n(n, sims):
-    sims_ = sorted(sims)[::-1]
-    sims_ = sims_[:-1]
-    print (sims)
-    return (sum(sims_)/len(sims_))
-    # exit()
-
-def display(sims):
-    # print (len(sims))
-    # print (len(nd0))
-    sims = sorted(sims)[::-1]
-    # sims = sims[:-1]
-    print (sims)
-    n = int(len(sims)*.5)
-    # for a, e in zip(sims, nd0):
-    #     print (a, e)
-    n_avg = sum(sims)/len(sims)
-    n_avg_conv = 1.007485 + (0.5987585 - 1.007485)/(1 + (max(sims)/0.7986861)**17.69422)
-
-    print (len(sims))
-    print ("Max Score: %s" % max(sims))
-    # print ("Converted Max Score: %s"  % (1.003382 + (0.00004280836 - 1.003382)/(1 + (max(sims)/0.7101592)**14.41005)))
-    print ("Average Score: %s" % (sum(sims)/len(sims)))
-    print ("%s Average Score: %s" % (n, n_avg))
-    print ("%s Converted Average Score: %s" % (n, n_avg_conv))
-
-
-
-
-# print ("%s | %s: %s" % (save_docs[0], save_docs[1], sim[0]))
-# print ("%s | %s: %s" % (save_docs[1], save_docs[2], sim[1]))
-# print ("%s | %s: %s" % (save_docs[2], save_docs[0], sim[2]))
-print (" ")
-display(sims)
-print (" ")
-display(sims2)
-
-
-# w2v_w1 = word2vec.predict([word1_p])
-# w2v_w2 = word2vec.predict([word2_p])
-# w2v_w3 = word2vec.predict([word3_p])
-
-# print (w2v_w1)
-# print (w2v_w2)
-# print (w2v_w3)
-
-# print (calculate_similarity(w2v_w1, w2v_w2))
-# print (calculate_similarity(w2v_w1, w2v_w3))
-# print (calculate_similarity(w2v_w2, w2v_w3))
-
-# # print (w2v_w1)
-# # print (layer_output)
+w2v_.create_matrix(w2vecs)
+w2vecs.sort()
+for i in w2vecs[::-1]:
+    print (i)
+# y = np.ceil(distribution * 10)/10
+# print(y)

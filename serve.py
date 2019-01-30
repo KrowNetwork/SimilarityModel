@@ -19,6 +19,8 @@ import sys
 import tensorflow as tf 
 from commonregex import CommonRegex
 
+from word2vec import W2VDocument
+
 K = tf.keras.backend
 load_model = tf.keras.models.load_model
 
@@ -28,8 +30,8 @@ w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
 model = load_model("model.h5")
-word2vec = tf.keras.models.Model(inputs=model.input[0], outputs=model.get_layer("embedding").output)
-word2vec._make_predict_function()
+word2vec_model = tf.keras.models.Model(inputs=model.input[0], outputs=model.get_layer("embedding").output)
+word2vec_model._make_predict_function()
 
 
 def clean(docs):
@@ -182,18 +184,12 @@ def predict_user():
     return flask.jsonify(calculate_similarity(data1, data2))
 
 def compare(d1, d2):
-    d2_ret = create_vec_job(d2)
-    d1_rets = create_vec_resume(d1)
+    
 
-    sims = []
-    for i in d1_rets:
-        # print (i)
-        sims.append(calculate_similarity(i, d2_ret))
+    d1_w2v = W2VDocument(d1, word2vec_model, w2v)
+    d2_w2v = W2VDocument(d2, word2vec_model, w2v)
 
-    # x = get_avg_n(int(len(sims)*1), sims)
-    x = sum(sims)/len(sims)
-    # x = 1.007485 + (0.5987585 - 1.007485)/(1 + (max(sims)/0.7986861)**17.69422)
-    return x
+    x = d1_w2v.calculate_similarity(d2_w2v)
     # print(x)
     # x = 1.011951 + (0.0001021114 - 1.011951)/(1 + (x/0.5718397)**5.644143)
     return x
