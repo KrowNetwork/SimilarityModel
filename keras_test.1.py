@@ -88,48 +88,7 @@ documents = pickle.load(open("clean.bin", "rb"))
 w2v = pickle.load(open("w2v.bin", "rb"))
 # v2w = pickle.load(open("v2w.bin", "rb"))
 
-job_2 = """What does a Best Buy Sales Consultant – Computing and DI do?
-
-At Best Buy our mission is to leverage the unique talents and passions of our employees to inspire, delight, and enrich the lives our customers through technology and all its possibilities. If you have a passion and curiosity for what is possible and enjoy people, we invite you to join us on this mission.
-
-Best Buy Sales Consultants excel at selling products and services, working closely with other members of the sales team. They accumulate the appropriate knowledge and expertise through continuous learning and self development. Then, armed with the right tools and knowledge, they create ease and add value to the Best Buy shopping experience, ensuring customers’ end-to-end needs are met. As a trusted advisor and partner, Best Buy Sales Consultants deliver unique customer value by developing strong relationships with customers, bringing them a little closer to family and friends by helping them close the gaps with technology.
-
-You’re a techno learner who enjoys working with people-employees and customers! Sales Consultants must not only know latest products-mobile devices, laptops, tablets-but stay ahead of the curve by frequently exploring and learning about new products and solutions.
-
-80% of your time you will:
-
-Engage customers using selling skills to build complex, connected solutions in a fast-paced, dynamic environment where customers feel supported and leave delighted.
-
-Inspire customers by showing them what’s possible with technology.
-
-
-20% of your time you will:
-
-Use innovative training tools to stay current, confident and complete, driving profitable growth and achieving individual and department goals.
-
-Accumulate and apply the appropriate knowledge and expertise through continuous learning and self-development, enabling you to provide an excellent customer shopping experience.
-
-Maintain your department’s merchandising and readiness to serve customers. Back up the sales team for phone and store pickup.
-
-Perform other duties as assigned.
-
-
-What are the Professional Requirements of a Best Buy Sales Consultant?
-
-Basic Qualifications
-
-Ability to work successfully as part of a team
-
-Ability to work a flexible schedule inclusive of holidays, nights and weekends
-
-Preferred Qualifications
-
-3 months experience working in customer service, sales or related fields
-
-
-What are my rewards and benefits?
-Discover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you’ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people.
-"""
+job_2 = """What does a Best Buy Sales Consultant \\u2013 Computing and DI do?\n\nAt Best Buy our mission is to leverage the unique talents and passions of our employees to inspire, delight, and enrich the lives our customers through technology and all its possibilities. If you have a passion and curiosity for what is possible and enjoy people, we invite you to join us on this mission.\n\nBest Buy Sales Consultants excel at selling products and services, working closely with other members of the sales team. They accumulate the appropriate knowledge and expertise through continuous learning and self development. Then, armed with the right tools and knowledge, they create ease and add value to the Best Buy shopping experience, ensuring customers\\u2019 end-to-end needs are met. As a trusted advisor and partner, Best Buy Sales Consultants deliver unique customer value by developing strong relationships with customers, bringing them a little closer to family and friends by helping them close the gaps with technology.\n\nYou\\u2019re a techno learner who enjoys working with people-employees and customers! Sales Consultants must not only know latest products-mobile devices, laptops, tablets-but stay ahead of the curve by frequently exploring and learning about new products and solutions.\n\n80% of your time you will:\n\nEngage customers using selling skills to build complex, connected solutions in a fast-paced, dynamic environment where customers feel supported and leave delighted.\n\nInspire customers by showing them what\\u2019s possible with technology.\n\n\n20% of your time you will:\n\nUse innovative training tools to stay current, confident and complete, driving profitable growth and achieving individual and department goals.\n\nAccumulate and apply the appropriate knowledge and expertise through continuous learning and self-development, enabling you to provide an excellent customer shopping experience.\n\nMaintain your department\\u2019s merchandising and readiness to serve customers. Back up the sales team for phone and store pickup.\n\nPerform other duties as assigned.\n\n\nWhat are the Professional Requirements of a Best Buy Sales Consultant?\n\nBasic Qualifications\n\nAbility to work successfully as part of a team\n\nAbility to work a flexible schedule inclusive of holidays, nights and weekends\n\nPreferred Qualifications\n\n3 months experience working in customer service, sales or related fields\n\n\nWhat are my rewards and benefits?\nDiscover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you\\u2019ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people.\n"""
 import random
 # job_2 = """Full stack developer with experience in languages ranging from Javascript to Python, as well as deep learning and artificial intelligence algorithms. Extensive experience in customer service and customer relations in a retail and services setting. Experience. Krow Network / Co-founder and Chief Technology Officer August 2018 - PRESENT, NEWARK, NJ Leading multi-platform development to build a useable product for job seekers in the United States. Oversee all development of user facing and back-end services, and fully operate all artificial intelligence programs. Best Buy / Connected Devices Sales Consultant OCTOBER 2018 - PRESENT, UNION, NJ Develop relationships with customers to understand their situation and recommend the right solution. Implement sales tactics as well as sell recurring services and sign ups for the store credit card. Westfield, NJ / Intern at Technology Advisory Committee OCTOBER 2018 - PRESENT, WESTFIELD, NJ Meet with team members once a month to develop new technological solutions to current issues facing the town. Advise the mayor on budgeting concerns, and implementation of new ideas. Gold Medal Fitness / Member Services"""
 
@@ -164,7 +123,7 @@ w2v_ = W2VDocument(job_2, word2vec_model, w2v)
 
 for i in docs:
 
-    w2v_1 = W2VDocument(i, word2vec_model, w2v)
+    w2v_1 = W2VDocument(i.lower(), word2vec_model, w2v)
     w2vecs.append(w2v_1)
 
 # w2v_.display_pca(w2vecs)
