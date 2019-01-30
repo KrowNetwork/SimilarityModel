@@ -17,6 +17,7 @@ import string
 import requests
 import sys
 import tensorflow as tf 
+
 from commonregex import CommonRegex
 
 from word2vec import W2VDocument
@@ -26,11 +27,16 @@ load_model = tf.keras.models.load_model
 
 stop_words = set(stopwords.words('english'))
 
-w2v = pickle.load(open("w2v.bin", "rb"))
-# v2w = pickle.load(open("v2w.bin", "rb"))
+x = load_model("model.h5")
+print ([layer.name for layer in x.layers])
 
-model = load_model("model.h5")
-word2vec_model = tf.keras.models.Model(inputs=model.input[0], outputs=model.get_layer("embedding").output)
+# word2vec = load_model("w2v.h5")
+
+word2vec_model = tf.keras.models.Model(inputs=x.input[0], outputs=x.get_layer("embedding").output)
+# word2vec.save("test.h5")
+# word2vec = load_model("test.h5")
+# word2vec.compile(optimizer=keras.optimizers.Adam())
+del x
 # word2vec_model._make_predict_function()
 
 
