@@ -38,6 +38,7 @@ word2vec_model = tf.keras.models.Model(inputs=x.input[0], outputs=x.get_layer("e
 # word2vec.compile(optimizer=keras.optimizers.Adam())
 del x
 word2vec_model._make_predict_function()
+w2v = pickle.load(open("w2v.bin", "rb"))
 
 
 def clean(docs):
