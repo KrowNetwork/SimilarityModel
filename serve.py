@@ -37,7 +37,7 @@ word2vec_model = tf.keras.models.Model(inputs=x.input[0], outputs=x.get_layer("e
 # word2vec = load_model("test.h5")
 # word2vec.compile(optimizer=keras.optimizers.Adam())
 del x
-# word2vec_model._make_predict_function()
+word2vec_model._make_predict_function()
 
 
 def clean(docs):
