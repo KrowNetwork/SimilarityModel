@@ -114,7 +114,7 @@ class W2VDocument():
                         y = 0
                     sims.append(y)
             # print (sims)
-            print (max(sims))
+            # print (max(sims))
             return sum(sims)/len(sims)
 
     def display_pca(self, w2vs):
