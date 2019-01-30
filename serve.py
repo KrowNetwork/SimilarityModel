@@ -84,7 +84,7 @@ def create_vec_job(data):
     data = [subword(w, w2v) for w in data]
     data = pad_sequences(data, maxlen=25, value=len(w2v), padding="post")
 
-    x = word2vec.predict(data)
+    x = word2vec_model.predict(data)
 
     for i in range(len(x)):
         a = x[i]
