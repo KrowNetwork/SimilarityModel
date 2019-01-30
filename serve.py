@@ -31,7 +31,7 @@ w2v = pickle.load(open("w2v.bin", "rb"))
 
 model = load_model("model.h5")
 word2vec_model = tf.keras.models.Model(inputs=model.input[0], outputs=model.get_layer("embedding").output)
-word2vec_model._make_predict_function()
+# word2vec_model._make_predict_function()
 
 
 def clean(docs):
@@ -127,7 +127,7 @@ def create_vec_resume(data):
     for z in data:
         e = []
         for b in z:
-            x = word2vec.predict(b)
+            x = word2vec_model.predict(b)
             for i in range(len(x)):
                 a = x[i]
                 a_d = np.linalg.norm(a)

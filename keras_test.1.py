@@ -17,7 +17,7 @@ from nltk.corpus import wordnet
 
 from sklearn.manifold import TSNE
 
-import wmd
+# import wmd
 
 # person_names=person_list
 person_list = []
@@ -129,7 +129,7 @@ What are my rewards and benefits?
 Discover your career here! At Best Buy we offer much more than a paycheck. Surrounded by the latest and greatest technology, a team of amazing coworkers and a work environment where anything is possible, you’ll find it easy to be your best when you work with us. We provide an exciting work environment with a community of techno learners where you can be yourself while investing in your career. Empowered with knowledge you will discover endless opportunities to grow. From deep employee discounts to tuition reimbursement, to health, wealth and wellness benefits, to learning and development programs, we believe the success of our company depends on the passion of employees for learning, technology and people.
 """
 import random
-job_2 = """Full stack developer with experience in languages ranging from Javascript to Python, as well as deep learning and artificial intelligence algorithms. Extensive experience in customer service and customer relations in a retail and services setting. Experience. Krow Network / Co-founder and Chief Technology Officer August 2018 - PRESENT, NEWARK, NJ Leading multi-platform development to build a useable product for job seekers in the United States. Oversee all development of user facing and back-end services, and fully operate all artificial intelligence programs. Best Buy / Connected Devices Sales Consultant OCTOBER 2018 - PRESENT, UNION, NJ Develop relationships with customers to understand their situation and recommend the right solution. Implement sales tactics as well as sell recurring services and sign ups for the store credit card. Westfield, NJ / Intern at Technology Advisory Committee OCTOBER 2018 - PRESENT, WESTFIELD, NJ Meet with team members once a month to develop new technological solutions to current issues facing the town. Advise the mayor on budgeting concerns, and implementation of new ideas. Gold Medal Fitness / Member Services"""
+# job_2 = """Full stack developer with experience in languages ranging from Javascript to Python, as well as deep learning and artificial intelligence algorithms. Extensive experience in customer service and customer relations in a retail and services setting. Experience. Krow Network / Co-founder and Chief Technology Officer August 2018 - PRESENT, NEWARK, NJ Leading multi-platform development to build a useable product for job seekers in the United States. Oversee all development of user facing and back-end services, and fully operate all artificial intelligence programs. Best Buy / Connected Devices Sales Consultant OCTOBER 2018 - PRESENT, UNION, NJ Develop relationships with customers to understand their situation and recommend the right solution. Implement sales tactics as well as sell recurring services and sign ups for the store credit card. Westfield, NJ / Intern at Technology Advisory Committee OCTOBER 2018 - PRESENT, WESTFIELD, NJ Meet with team members once a month to develop new technological solutions to current issues facing the town. Advise the mayor on budgeting concerns, and implementation of new ideas. Gold Medal Fitness / Member Services"""
 
 
 docs = [
