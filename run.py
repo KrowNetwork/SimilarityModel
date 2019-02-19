@@ -101,7 +101,7 @@ def generate(swords, scontext, dataset_size):
 # if __name__ == "__main__":
 #     freeze_support()
 batch_size = 2048 * 2
-epochs = 750
+epochs = 1000
 learning_rate = 0.0001
 dataset_size = 2000000
 emb_dim = 300

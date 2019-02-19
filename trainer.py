@@ -63,6 +63,15 @@ class ModelTrainer():
         self.K = K
         self.q = q
 
+        self.tensorboard = keras.callbacks.TensorBoard(
+            log_dir='/tmp/my_tf_logs',
+            histogram_freq=0,
+            batch_size=self.batch_size,
+            write_graph=True,
+            write_grads=True
+            )
+        self.tensorboard.set_model(model)
+
     def on_epoch_end(self):
         if self.shuffle == True:
             self.words, self.context, self.labels = self.randomize(self.words, self.context, self.labels)
@@ -91,6 +100,13 @@ class ModelTrainer():
         # exit()
     
         self.model.save("trained/model.h5")
+
+    @staticmethod
+    def named_logs(model, logs):
+        result = {}
+        for l in zip(model.metrics_names, logs):
+            result[l[0]] = l[1]
+        return result
 
     def train(self, z, epochs, start=0, loaded=False):
         pct = 0.5
@@ -176,6 +192,7 @@ class ModelTrainer():
                 b = time.time()
 
                 out = self.model.train_on_batch([x1, x2], y)
+                
                 b_res = time.time() - b
 
                 # print ("\n")
@@ -217,6 +234,7 @@ class ModelTrainer():
                 "loss": l,
                 "accuracy": a
             }
+            self.tensorboard.on_epoch_end(e, self.named_logs(self.model, [loss, accuracy]))
             # print (time.time() - start)
             self.experiment.log_metrics(metrics)
             self.model.save("trained/model_%s.h5" % e)

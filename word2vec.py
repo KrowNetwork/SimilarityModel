@@ -204,7 +204,7 @@ class W2VDocument():
         for i, a in zip(matrix[-1], w2vs):
             a.score = i
 
-        w2vs.pop(-1)
+        # w2vs.pop(-1)
         # return matrix[-1]
 
 
@@ -212,4 +212,5 @@ class W2VDocument():
 
         
     
+
 
